@@ -1,0 +1,9 @@
+{
+  "name": "Celestial Filament Tracker",
+  "short_name": "Filament",
+  "start_url": "filament.html",
+  "display": "standalone",
+  "background_color": "#0d0a2e",
+  "theme_color": "#0d0a2e",
+  "icons": [{ "src": "icon.png", "sizes": "512x512", "type": "image/png" }]
+}
