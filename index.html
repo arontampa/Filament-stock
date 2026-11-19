@@ -34,10 +34,10 @@
     color:var(--text);
     min-height:100vh;
     background:
-      radial-gradient(120vmax 80vmax at 50% -20%, #2a1a5e 0%, transparent 62%),
-      radial-gradient(85vmax 62vmax at 108% 108%, #14324a 0%, transparent 58%),
-      radial-gradient(72vmax 56vmax at -8% 88%, #3a1350 0%, transparent 60%),
-      linear-gradient(170deg,#0a0620 0%,#120a2c 35%,#0c0724 70%,#07040f 100%);
+      radial-gradient(1200px 700px at 50% -15%, #2a1a5e 0%, transparent 60%),
+      radial-gradient(900px 600px at 110% 110%, #14324a 0%, transparent 55%),
+      radial-gradient(700px 500px at -10% 85%, #3a1350 0%, transparent 60%),
+      linear-gradient(170deg, #0a0620 0%, #120a2c 35%, #0c0724 70%, #07040f 100%);
     background-attachment:fixed;
   }
 
@@ -53,19 +53,15 @@
       radial-gradient(1px 1px at 48px 206px, #e0d4ff, transparent 60%),
       radial-gradient(1.4px 1.4px at 268px 22px, #b9e8ff, transparent 60%),
       radial-gradient(1px 1px at 140px 250px, #ffd6ec, transparent 60%),
-      radial-gradient(1.2px 1.2px at 292px 268px, #ffffff, transparent 60%),
-      radial-gradient(1px 1px at 388px 96px, #ffffff, transparent 60%),
-      radial-gradient(1.3px 1.3px at 412px 340px, #d8ccff, transparent 60%),
-      radial-gradient(1px 1px at 330px 410px, #ffffff, transparent 60%),
-      radial-gradient(1.2px 1.2px at 76px 396px, #ffe9b8, transparent 60%);
-    background-size:460px 460px;
+      radial-gradient(1.2px 1.2px at 292px 268px, #ffffff, transparent 60%);
+    background-size:320px 320px;
     background-repeat:repeat;
-    opacity:.55;
+    opacity:.6;
     animation:twinkle 7s ease-in-out infinite alternate;
   }
-  @keyframes twinkle{ from{opacity:.3} to{opacity:.8} }
+  @keyframes twinkle{ from{opacity:.32} to{opacity:.85} }
 
-  /* ── faceted light wash + vignette ───────────────────── */
+  /* ── faceted light wash ──────────────────────────────── */
   body::after{
     content:"";
     position:fixed; inset:0; z-index:0; pointer-events:none;
@@ -74,8 +70,7 @@
         rgba(255,255,255,.07), transparent 22%,
         rgba(255,158,203,.05) 42%, transparent 58%,
         rgba(126,240,224,.05) 78%, transparent 100%),
-      radial-gradient(120% 95% at 50% 45%, transparent 52%, rgba(3,1,10,.6) 100%),
-      radial-gradient(1200px 600px at 50% -10%, rgba(201,184,255,.16), transparent 60%),
+      radial-gradient(1200px 600px at 50% -10%, rgba(201,184,255,.18), transparent 60%),
       radial-gradient(900px 500px at 92% 112%, rgba(126,240,224,.10), transparent 60%);
   }
 
@@ -127,4 +122,500 @@
     letter-spacing:.02em;
     color:#fff;
     cursor:pointer;
-    margin:4
+    margin:4px 2px;
+    background:linear-gradient(150deg,#5b3ec8 0%,#2a1a63 52%,#40268f 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.55),
+      inset 0 -3px 8px rgba(0,0,0,.5),
+      0 6px 20px rgba(91,62,200,.38);
+    transition:transform .12s ease, box-shadow .25s ease, filter .2s ease;
+  }
+  button::after{
+    content:"";
+    position:absolute; top:-60%; left:-130%;
+    width:55%; height:230%;
+    background:linear-gradient(75deg,transparent,rgba(255,255,255,.7),transparent);
+    transform:rotate(18deg);
+    transition:left .6s cubic-bezier(.3,.7,.4,1);
+    pointer-events:none;
+  }
+  button:hover::after{left:135%}
+  button:hover{
+    transform:translateY(-1px);
+    filter:brightness(1.1);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.6),
+      inset 0 -3px 8px rgba(0,0,0,.5),
+      0 10px 26px rgba(126,240,224,.28);
+  }
+  button:active{transform:translateY(1px) scale(.99)}
+
+  .blue{
+    background:linear-gradient(150deg,#4b3bb8 0%,#241a5e 55%,#3b2a91 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.5),
+      inset 0 -3px 8px rgba(0,0,0,.5),
+      0 6px 20px rgba(75,59,184,.42);
+  }
+
+  /* ── login panel ─────────────────────────────────────── */
+  #login{
+    max-width:360px;
+    margin:52px auto;
+    padding:28px 24px 32px;
+    text-align:center;
+    border-radius:24px;
+    border:1px solid rgba(201,184,255,.3);
+    background:
+      linear-gradient(150deg, rgba(255,255,255,.10), rgba(255,255,255,.015) 46%, rgba(255,255,255,.06)),
+      linear-gradient(160deg,#1b1240,#110a2a 70%,#160e34);
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,.05),
+      0 26px 64px rgba(0,0,0,.65),
+      0 0 90px rgba(91,62,200,.28);
+    backdrop-filter:blur(10px);
+  }
+  #login input,#login button{width:100%}
+  #login input{margin:6px 0}
+  #login button{
+    margin-top:14px;
+    padding:13px;
+    font-size:1.02em;
+    background:linear-gradient(150deg,#1fbf9a 0%,#0b6b58 55%,#12927a 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.55),
+      inset 0 -3px 8px rgba(0,0,0,.45),
+      0 8px 24px rgba(31,191,154,.35);
+  }
+
+  /* ── inputs ──────────────────────────────────────────── */
+  input{
+    padding:11px 13px;
+    margin:4px 0;
+    border-radius:12px;
+    border:1px solid rgba(201,184,255,.28);
+    font-family:inherit;
+    font-size:1em;
+    color:#f3eeff;
+    background:linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.02));
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.16),
+      inset 0 -8px 16px rgba(0,0,0,.3);
+    transition:border-color .2s, box-shadow .2s;
+  }
+  input::placeholder{color:#9487c4}
+  input:focus{
+    outline:none;
+    border-color:rgba(126,240,224,.75);
+    box-shadow:
+      0 0 0 3px rgba(126,240,224,.14),
+      0 0 22px rgba(126,240,224,.22),
+      inset 0 1px 0 rgba(255,255,255,.2);
+  }
+  input[type=file]{
+    color:var(--muted);
+    font-size:.85em;
+    background:none;
+    border:none;
+    box-shadow:none;
+    padding:6px 0;
+  }
+
+  #search{
+    width:100%;
+    padding:14px 16px;
+    margin:12px 0;
+    font-size:1.05em;
+    border-radius:15px;
+    border:1px solid rgba(201,184,255,.32);
+    background:
+      linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.025)),
+      rgba(20,12,48,.6);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.18),
+      0 10px 28px rgba(0,0,0,.4);
+    backdrop-filter:blur(8px);
+  }
+  #search:focus{
+    outline:none;
+    border-color:rgba(126,240,224,.85);
+    box-shadow:
+      0 0 0 3px rgba(126,240,224,.16),
+      0 0 30px rgba(126,240,224,.28),
+      inset 0 1px 0 rgba(255,255,255,.25);
+  }
+
+  /* ── add bar ─────────────────────────────────────────── */
+  #addbar{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    margin:10px 0;
+  }
+  #addbar input{width:100%}
+  #addbar button{
+    grid-column:1/3;
+    background:linear-gradient(150deg,#1fbf9a 0%,#0b6b58 55%,#12927a 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.55),
+      inset 0 -3px 8px rgba(0,0,0,.45),
+      0 8px 24px rgba(31,191,154,.32);
+  }
+
+  /* ── brand chip ──────────────────────────────────────── */
+  .hdr{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    margin-top:18px;
+    padding:8px 14px;
+    border-radius:0 12px 12px 0;
+    border-left:3px solid var(--gold);
+    background:linear-gradient(90deg, rgba(91,62,200,.55), rgba(59,30,115,.12));
+    font-family:"Cinzel",Georgia,serif;
+    font-size:.82em;
+    font-weight:700;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:#f2ecff;
+    box-shadow:0 0 22px rgba(255,216,138,.14);
+  }
+  .hdr::before{
+    content:"✦";
+    color:var(--gold);
+    font-size:1.1em;
+    text-shadow:0 0 10px rgba(255,216,138,.8);
+  }
+
+  /* ── faceted gem cards ───────────────────────────────── */
+  .item{
+    position:relative;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:13px 12px;
+    margin:8px 0;
+    border-radius:15px;
+    overflow:hidden;
+    border:1px solid rgba(201,184,255,.22);
+    background:
+      linear-gradient(135deg,
+        rgba(255,255,255,.11) 0%, rgba(255,255,255,0) 30%,
+        rgba(255,255,255,.06) 50%, rgba(255,255,255,0) 70%,
+        rgba(255,255,255,.09) 100%),
+      linear-gradient(160deg,#221650 0%,#170f36 58%,#1c1244 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.14),
+      inset 0 -10px 22px rgba(0,0,0,.35),
+      0 10px 26px rgba(0,0,0,.45);
+  }
+  /* facet lines */
+  .item::before{
+    content:"";
+    position:absolute; inset:0;
+    pointer-events:none;
+    background:
+      linear-gradient(115deg, transparent 45%, rgba(255,255,255,.075) 46%, transparent 47%),
+      linear-gradient(64deg, transparent 62%, rgba(255,255,255,.05) 63%, transparent 64%);
+  }
+
+  .item.out{
+    background:
+      linear-gradient(135deg, rgba(255,255,255,.10) 0%, transparent 34%, rgba(255,255,255,.05) 60%, transparent 100%),
+      linear-gradient(160deg,#4d1030 0%,#2a0a1c 58%,#3a0d26 100%);
+    border-color:rgba(255,138,128,.55);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.16),
+      inset 0 -10px 22px rgba(0,0,0,.4),
+      0 0 26px rgba(244,67,54,.32);
+  }
+  .item.multi{
+    background:
+      linear-gradient(135deg, rgba(255,255,255,.10) 0%, transparent 34%, rgba(255,255,255,.05) 60%, transparent 100%),
+      linear-gradient(160deg,#0e3f37 0%,#092a28 58%,#0d3a35 100%);
+    border-color:rgba(126,240,224,.55);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.16),
+      inset 0 -10px 22px rgba(0,0,0,.4),
+      0 0 26px rgba(126,240,224,.28);
+  }
+
+  .item .name{
+    flex:1;
+    position:relative;
+    z-index:1;
+    font-weight:600;
+    letter-spacing:.015em;
+    color:#f6f2ff;
+    text-shadow:0 1px 2px rgba(0,0,0,.5);
+  }
+  .item.out .name::after{
+    content:'  ⛔ OUT';
+    color:#ffb0a6;
+    font-size:.78em;
+    letter-spacing:.08em;
+  }
+  .item.multi .name::after{
+    content:'  ✅ STOCKED';
+    color:#9df0d9;
+    font-size:.78em;
+    letter-spacing:.08em;
+  }
+
+  .qty{
+    position:relative;
+    z-index:1;
+    min-width:38px;
+    text-align:center;
+    font-size:1.35em;
+    font-weight:800;
+    background:linear-gradient(180deg,#ffffff,#c9b8ff);
+    -webkit-background-clip:text; background-clip:text;
+    color:transparent;
+    filter:drop-shadow(0 0 9px rgba(201,184,255,.55));
+  }
+
+  /* ── small gem buttons ───────────────────────────────── */
+  .pm,.del{
+    position:relative;
+    z-index:1;
+    width:40px; height:40px;
+    padding:0;
+    border-radius:13px;
+    font-size:1.15em;
+    line-height:1;
+    margin:0;
+  }
+  .pm::after,.del::after{display:none}
+  .pm{
+    background:linear-gradient(150deg,
+      rgba(255,255,255,.32) 0%,
+      rgba(120,90,230,.28) 45%,
+      rgba(255,255,255,.12) 100%);
+    border:1px solid rgba(255,255,255,.3);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.65),
+      inset 0 -4px 9px rgba(0,0,0,.4),
+      0 4px 14px rgba(90,60,200,.35);
+  }
+  .del{
+    font-size:1em;
+    color:#ffd6e8;
+    background:linear-gradient(150deg, rgba(255,158,203,.32) 0%, rgba(120,20,60,.4) 100%);
+    border:1px solid rgba(255,158,203,.45);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.4),
+      inset 0 -4px 9px rgba(0,0,0,.45),
+      0 4px 14px rgba(120,20,60,.4);
+  }
+
+  #user{
+    font-size:.78em;
+    letter-spacing:.06em;
+    text-align:center;
+    color:var(--muted);
+    margin-bottom:8px;
+  }
+  #user::before{
+    content:"✦ ";
+    color:var(--aqua);
+  }
+
+  #count{
+    color:var(--gold);
+    font-weight:700;
+    text-shadow:0 0 12px rgba(255,216,138,.6);
+  }
+
+  p{
+    color:var(--muted);
+    text-align:center;
+    line-height:1.5;
+  }
+
+  /* ── desktop ─────────────────────────────────────────── */
+  @media(min-width:768px){
+    body{max-width:980px;margin:0 auto;padding:20px}
+    #inventory{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      column-gap:28px;
+      align-items:start;
+    }
+    h1{font-size:1.75em}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none !important; transition:none !important}
+    button::after{display:none}
+  }
+</style>
+</head>
+<body>
+<div id="login">
+  <h1>Zodiac Shadows Inventory</h1>
+  <p>Sign in to sync</p>
+  <input id="email" type="email" placeholder="Email">
+  <input id="pass" type="password" placeholder="Password">
+  <button onclick="login()">Sign In</button>
+</div>
+<div id="app" style="display:none">
+  <h1>Zodiac Shadows Inventory</h1>
+  <div id="user"></div>
+  <input id="search" type="text" placeholder="🔍 Search brand or color..." oninput="render()">
+  <h3>Inventory (<span id="count">0</span> shown)</h3>
+  <div id="inventory"><div id="list"></div></div>
+  <h3>Add Manually</h3>
+  <div id="addbar">
+    <input id="nBrand" type="text" placeholder="Brand">
+    <input id="nColor" type="text" placeholder="Color name">
+    <button onclick="addItem()">Add Item</button>
+  </div>
+  <h3>Tools</h3>
+  <input type="file" accept=".csv" onchange="importCSV(event)">
+  <br>
+  <button class="blue" onclick="shareList()">📤 Share List</button>
+  <button class="blue" onclick="exportCSV()">💾 Backup CSV</button>
+  <button class="blue" onclick="logout()">🔒 Sign Out</button>
+</div>
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyAdQORg8wG4WHIEXj5w9l4TAZUnxtR3Wxk",
+  authDomain: "filament-stock-43efd.firebaseapp.com",
+  databaseURL: "https://filament-stock-43efd-default-rtdb.firebaseio.com",
+  projectId: "filament-stock-43efd",
+  storageBucket: "filament-stock-43efd.firebasestorage.app",
+  messagingSenderId: "427072456191",
+  appId: "1:427072456191:web:a38213af5e088f49bed3ca"
+};
+
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const fdb = firebase.database();
+const ROOT = fdb.ref('filament');
+
+let db = JSON.parse(localStorage.getItem('fil') || '{}');
+const cache = () => localStorage.setItem('fil', JSON.stringify(db));
+const keyOf = (b,c) => 'FT|' + b.trim() + '|' + c.trim();
+const safeKey = k => k.replace(/[.#$$$$$\/]/g, '_');
+function status(q){ return q==0 ? 'out' : (q>=2 ? 'multi' : ''); }
+
+function login(){
+  auth.signInWithEmailAndPassword(email.value, pass.value)
+    .catch(e => alert('Login failed: ' + e.message));
+}
+function logout(){ auth.signOut(); }
+
+auth.onAuthStateChanged(user => {
+  if(user){
+    document.getElementById('login').style.display='none';
+    document.getElementById('app').style.display='block';
+    document.getElementById('user').textContent = 'Synced as: ' + user.email;
+    ROOT.on('value', snap => {
+      const remote = snap.val() || {};
+      db = {};
+      for(const k in remote) db[k] = remote[k];
+      cache(); render();
+    });
+  } else {
+    document.getElementById('login').style.display='block';
+    document.getElementById('app').style.display='none';
+    ROOT.off();
+  }
+});
+
+function render(){
+  const q = document.getElementById('search').value.toLowerCase();
+  const list = document.getElementById('list');
+  const keys = Object.keys(db)
+    .filter(k => !q || (db[k].brand + ' ' + db[k].color).toLowerCase().includes(q))
+    .sort((a,b)=>{
+      const ba = db[a].brand.toLowerCase(), bb = db[b].brand.toLowerCase();
+      if(ba !== bb) return ba.localeCompare(bb);
+      return db[a].color.localeCompare(db[b].color);
+    });
+  document.getElementById('count').textContent = keys.length;
+  let lastBrand = '', html = '';
+  keys.map(k=>{
+    const i = db[k];
+    const ek = k.replace(/'/g,"\\'").replace(/"/g,'&quot;');
+    if(i.brand !== lastBrand){ lastBrand = i.brand; html += `<div class="hdr">${i.brand}</div>`; }
+    html += `<div class="item ${status(i.qty)}">
+      <div class="name">${i.color}</div>
+      <button class="pm" onclick="chg('${ek}',-1)">−</button>
+      <span class="qty">${i.qty}</span>
+      <button class="pm" onclick="chg('${ek}',1)">+</button>
+      <button class="del" onclick="removeItem('${ek}')">🗑️</button>
+    </div>`;
+  });
+  list.innerHTML = html || '<p>' + (q ? 'No matches for "' + q + '"' : 'Nothing tracked yet. Import your CSV!') + '</p>';
+}
+
+function chg(k,n){
+  const q = Math.max(0, db[k].qty + n);
+  ROOT.child(safeKey(k) + '/qty').set(q);
+}
+
+function removeItem(k){
+  const i = db[k];
+  if(confirm('Remove ' + i.brand + ' — ' + i.color + ' from tracking?')){
+    ROOT.child(safeKey(k)).remove();
+  }
+}
+
+function addItem(){
+  const b = nBrand.value.trim(), c = nColor.value.trim();
+  if(!b || !c){ alert('Need both a brand and a color name.'); return; }
+  const k = keyOf(b, c);
+  if(db[k]){ alert('Already tracking ' + b + ' — ' + c + '.'); return; }
+  ROOT.child(safeKey(k)).set({brand:b, color:c, qty:0});
+  nBrand.value = ''; nColor.value = '';
+}
+
+function importCSV(e){
+  const f = e.target.files[0]; if(!f) return;
+  const r = new FileReader();
+  r.onload = () => {
+    let added = 0, skipped = 0;
+    r.result.split('\n').slice(1).forEach(line=>{
+      const cols = line.split(',').map(s=>s.trim().replace(/"/g,''));
+      const brand = cols[0], color = cols[1], qty = parseInt(cols[2]) || 0;
+      if(!brand || !color) return;
+      const k = keyOf(brand, color);
+      if(db[k]){ skipped++; }
+      else {
+        ROOT.child(safeKey(k)).set({brand, color, qty: qty});
+        added++;
+      }
+    });
+    alert(added + ' new item(s) added with their CSV quantities. ' + skipped + ' existing kept as-is.');
+  };
+  r.readAsText(f);
+}
+
+function makeCSV(){
+  let csv = 'Brand,Color,Qty\n';
+  for(const k in db) csv += `"${db[k].brand}","${db[k].color}",${db[k].qty}\n`;
+  return csv;
+}
+
+function exportCSV(){
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([makeCSV()],{type:'text/csv'}));
+  a.download = 'filament_backup.csv'; a.click();
+}
+
+async function shareList(){
+  const file = new File([makeCSV()], 'filament_list.csv', {type:'text/csv'});
+  if(navigator.canShare && navigator.canShare({files:[file]})){
+    await navigator.share({files:[file], title:'Zodiac Shadows Inventory'});
+  } else {
+    await navigator.clipboard.writeText(makeCSV());
+    alert('CSV copied to clipboard.');
+  }
+}
+
+if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
+</script>
+</body>
+</html>
