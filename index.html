@@ -34,10 +34,10 @@
     color:var(--text);
     min-height:100vh;
     background:
-      radial-gradient(1200px 700px at 50% -15%, #2a1a5e 0%, transparent 60%),
-      radial-gradient(900px 600px at 110% 110%, #14324a 0%, transparent 55%),
-      radial-gradient(700px 500px at -10% 85%, #3a1350 0%, transparent 60%),
-      linear-gradient(170deg, #0a0620 0%, #120a2c 35%, #0c0724 70%, #07040f 100%);
+      radial-gradient(120vmax 80vmax at 50% -20%, #2a1a5e 0%, transparent 62%),
+      radial-gradient(85vmax 62vmax at 108% 108%, #14324a 0%, transparent 58%),
+      radial-gradient(72vmax 56vmax at -8% 88%, #3a1350 0%, transparent 60%),
+      linear-gradient(170deg,#0a0620 0%,#120a2c 35%,#0c0724 70%,#07040f 100%);
     background-attachment:fixed;
   }
 
@@ -53,15 +53,19 @@
       radial-gradient(1px 1px at 48px 206px, #e0d4ff, transparent 60%),
       radial-gradient(1.4px 1.4px at 268px 22px, #b9e8ff, transparent 60%),
       radial-gradient(1px 1px at 140px 250px, #ffd6ec, transparent 60%),
-      radial-gradient(1.2px 1.2px at 292px 268px, #ffffff, transparent 60%);
-    background-size:320px 320px;
+      radial-gradient(1.2px 1.2px at 292px 268px, #ffffff, transparent 60%),
+      radial-gradient(1px 1px at 388px 96px, #ffffff, transparent 60%),
+      radial-gradient(1.3px 1.3px at 412px 340px, #d8ccff, transparent 60%),
+      radial-gradient(1px 1px at 330px 410px, #ffffff, transparent 60%),
+      radial-gradient(1.2px 1.2px at 76px 396px, #ffe9b8, transparent 60%);
+    background-size:460px 460px;
     background-repeat:repeat;
-    opacity:.6;
+    opacity:.55;
     animation:twinkle 7s ease-in-out infinite alternate;
   }
-  @keyframes twinkle{ from{opacity:.32} to{opacity:.85} }
+  @keyframes twinkle{ from{opacity:.3} to{opacity:.8} }
 
-  /* ── faceted light wash ──────────────────────────────── */
+  /* ── faceted light wash + vignette ───────────────────── */
   body::after{
     content:"";
     position:fixed; inset:0; z-index:0; pointer-events:none;
@@ -70,7 +74,8 @@
         rgba(255,255,255,.07), transparent 22%,
         rgba(255,158,203,.05) 42%, transparent 58%,
         rgba(126,240,224,.05) 78%, transparent 100%),
-      radial-gradient(1200px 600px at 50% -10%, rgba(201,184,255,.18), transparent 60%),
+      radial-gradient(120% 95% at 50% 45%, transparent 52%, rgba(3,1,10,.6) 100%),
+      radial-gradient(1200px 600px at 50% -10%, rgba(201,184,255,.16), transparent 60%),
       radial-gradient(900px 500px at 92% 112%, rgba(126,240,224,.10), transparent 60%);
   }
 
@@ -292,36 +297,35 @@
     position:relative;
     display:flex;
     align-items:center;
-    gap:10px;
-    padding:13px 12px;
+    gap:12px;
+    padding:14px 14px;
     margin:8px 0;
-    border-radius:15px;
+    min-width:0;
+    border-radius:16px;
     overflow:hidden;
     border:1px solid rgba(201,184,255,.22);
     background:
-      linear-gradient(135deg,
-        rgba(255,255,255,.11) 0%, rgba(255,255,255,0) 30%,
-        rgba(255,255,255,.06) 50%, rgba(255,255,255,0) 70%,
-        rgba(255,255,255,.09) 100%),
+      radial-gradient(130% 95% at 0% 0%, rgba(255,255,255,.14), transparent 56%),
       linear-gradient(160deg,#221650 0%,#170f36 58%,#1c1244 100%);
     box-shadow:
       inset 0 1px 0 rgba(255,255,255,.14),
       inset 0 -10px 22px rgba(0,0,0,.35),
       0 10px 26px rgba(0,0,0,.45);
   }
-  /* facet lines */
+
+  /* cut-stone lattice */
   .item::before{
     content:"";
     position:absolute; inset:0;
     pointer-events:none;
-    background:
-      linear-gradient(115deg, transparent 45%, rgba(255,255,255,.075) 46%, transparent 47%),
-      linear-gradient(64deg, transparent 62%, rgba(255,255,255,.05) 63%, transparent 64%);
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='0.07' stroke-width='1'%3E%3Cpath d='M60 0 L120 60 L60 120 L0 60 Z'/%3E%3Cpath d='M0 0 L60 60 L0 120'/%3E%3Cpath d='M120 0 L60 60 L120 120'/%3E%3Cpath d='M0 60 L120 60'/%3E%3C/g%3E%3C/svg%3E");
+    background-size:120px 120px;
+    opacity:.85;
   }
 
   .item.out{
     background:
-      linear-gradient(135deg, rgba(255,255,255,.10) 0%, transparent 34%, rgba(255,255,255,.05) 60%, transparent 100%),
+      radial-gradient(130% 95% at 0% 0%, rgba(255,255,255,.14), transparent 56%),
       linear-gradient(160deg,#4d1030 0%,#2a0a1c 58%,#3a0d26 100%);
     border-color:rgba(255,138,128,.55);
     box-shadow:
@@ -331,7 +335,7 @@
   }
   .item.multi{
     background:
-      linear-gradient(135deg, rgba(255,255,255,.10) 0%, transparent 34%, rgba(255,255,255,.05) 60%, transparent 100%),
+      radial-gradient(130% 95% at 0% 0%, rgba(255,255,255,.14), transparent 56%),
       linear-gradient(160deg,#0e3f37 0%,#092a28 58%,#0d3a35 100%);
     border-color:rgba(126,240,224,.55);
     box-shadow:
@@ -340,8 +344,41 @@
       0 0 26px rgba(126,240,224,.28);
   }
 
+  /* faceted gem swatch — hue derived from color name */
+  .gem{
+    position:relative;
+    z-index:1;
+    flex:0 0 auto;
+    width:26px; height:26px;
+    border-radius:50%;
+    background:
+      conic-gradient(from 20deg,
+        hsl(var(--h) 88% 74%) 0deg,
+        hsl(calc(var(--h) + 42) 92% 58%) 55deg,
+        hsl(var(--h) 78% 86%) 110deg,
+        hsl(calc(var(--h) + 42) 92% 58%) 175deg,
+        hsl(var(--h) 88% 74%) 240deg,
+        hsl(calc(var(--h) - 30) 85% 64%) 300deg,
+        hsl(var(--h) 88% 74%) 360deg);
+    box-shadow:
+      inset 0 0 0 1px rgba(255,255,255,.6),
+      inset 0 -4px 8px rgba(0,0,0,.5),
+      inset 2px 2px 6px rgba(255,255,255,.5),
+      0 0 14px hsl(var(--h) 90% 65% / .5);
+  }
+  .gem::after{
+    content:"";
+    position:absolute;
+    top:3px; left:5px;
+    width:9px; height:7px;
+    border-radius:50%;
+    background:rgba(255,255,255,.85);
+    filter:blur(1.5px);
+  }
+
   .item .name{
     flex:1;
+    min-width:0;
     position:relative;
     z-index:1;
     font-weight:600;
@@ -379,6 +416,7 @@
   .pm,.del{
     position:relative;
     z-index:1;
+    flex:0 0 auto;
     width:40px; height:40px;
     padding:0;
     border-radius:13px;
@@ -435,14 +473,32 @@
 
   /* ── desktop ─────────────────────────────────────────── */
   @media(min-width:768px){
-    body{max-width:980px;margin:0 auto;padding:20px}
-    #inventory{
+    body{
+      max-width:1180px;
+      margin:0 auto;
+      padding:26px 22px;
+      font-size:17px;
+    }
+    h1{font-size:1.85em}
+
+    /* wrapper is NOT the grid — it only has one child */
+    #inventory{display:block}
+
+    /* grid lives on the actual item container */
+    #list{
       display:grid;
-      grid-template-columns:1fr 1fr;
-      column-gap:28px;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      column-gap:26px;
+      row-gap:2px;
       align-items:start;
     }
-    h1{font-size:1.75em}
+    .hdr{grid-column:1/-1;margin-top:22px}
+    .item{padding:16px 16px;min-height:60px;gap:13px}
+    .qty{min-width:44px;font-size:1.45em}
+    .pm,.del{width:42px;height:42px}
+    .gem{width:28px;height:28px}
+    #login{max-width:380px;margin-top:72px}
+    #search{padding:15px 18px}
   }
 
   @media (prefers-reduced-motion:reduce){
@@ -500,6 +556,13 @@ const keyOf = (b,c) => 'FT|' + b.trim() + '|' + c.trim();
 const safeKey = k => k.replace(/[.#$$$$$\/]/g, '_');
 function status(q){ return q==0 ? 'out' : (q>=2 ? 'multi' : ''); }
 
+/* deterministic hue from a color name → gem swatch */
+function hueOf(s){
+  let h = 0;
+  for(let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) % 360;
+  return h;
+}
+
 function login(){
   auth.signInWithEmailAndPassword(email.value, pass.value)
     .catch(e => alert('Login failed: ' + e.message));
@@ -539,8 +602,10 @@ function render(){
   keys.map(k=>{
     const i = db[k];
     const ek = k.replace(/'/g,"\\'").replace(/"/g,'&quot;');
+    const hue = hueOf(i.color + '|' + i.brand);
     if(i.brand !== lastBrand){ lastBrand = i.brand; html += `<div class="hdr">${i.brand}</div>`; }
     html += `<div class="item ${status(i.qty)}">
+      <span class="gem" style="--h:${hue}"></span>
       <div class="name">${i.color}</div>
       <button class="pm" onclick="chg('${ek}',-1)">−</button>
       <span class="qty">${i.qty}</span>
