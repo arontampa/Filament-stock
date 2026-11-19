@@ -1,5 +1,5 @@
 const CACHE = 'filament-v1';
-const ASSETS = ['filament.html', 'manifest.json', 'icon.png'];
+const ASSETS = ['index.html', 'manifest.json', 'icon.png'];
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)));
 });
