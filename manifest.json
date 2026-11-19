@@ -1,7 +1,7 @@
 {
   "name": "Zodiac Shadow Inventory",
   "short_name": "Filament",
-  "start_url": "filament.html",
+  "start_url": "index.html",
   "display": "standalone",
   "background_color": "#0d0a2e",
   "theme_color": "#0d0a2e",
