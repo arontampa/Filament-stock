@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0d0a2e">
+<title>✨ Zodiac Shadows Inventory</title>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Quicksand:wght@500;700&display=swap');
+  *{box-sizing:border-box}
+  body{
+    font-family:'Quicksand',sans-serif;color:#f0ecff;margin:0;padding:0;min-height:100vh;
+    background:
+      radial-gradient(ellipse 60% 40% at 75% 15%, rgba(255,60,180,.35), transparent 60%),
+      radial-gradient(ellipse 50% 35% at 20% 25%, rgba(0,220,255,.28), transparent 60%),
+      radial-gradient(ellipse 70% 45% at 50% 60%, rgba(150,60,255,.30), transparent 65%),
+      radial-gradient(ellipse 40% 30% at 85% 75%, rgba(255,100,60,.22), transparent 60%),
+      radial-gradient(ellipse 55% 40% at 10% 85%, rgba(0,255,200,.15), transparent 60%),
+      linear-gradient(180deg, #0d0a2e 0%, #1a0f45 50%, #0a0724 100%);
+    background-attachment:fixed;
+  }
+  body::before{
+    content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+    background-image:
+      radial-gradient(1.5px 1.5px at 15% 20%, #fff 50%, transparent 51%),
+      radial-gradient(1px 1px at 35% 60%, #fff 50%, transparent 51%),
+      radial-gradient(2px 2px at 55% 15%, #ffe9a8 50%, transparent 51%),
+      radial-gradient(1px 1px at 75% 40%, #fff 50%, transparent 51%),
+      radial-gradient(1.5px 1.5px at 90% 70%, #c9b8ff 50%, transparent 51%),
+      radial-gradient(1px 1px at 5% 75%, #fff 50%, transparent 51%),
+      radial-gradient(1.5px 1.5px at 45% 85%, #fff 50%, transparent 51%),
+      radial-gradient(2px 2px at 65% 55%, #b9f2ff 50%, transparent 51%);
+    opacity:.8;animation:twinkle 5s ease-in-out infinite alternate;
+  }
+  @keyframes twinkle{ from{opacity:.45} to{opacity:.95} }
+  .frame{position:relative;z-index:1;max-width:680px;margin:0 auto;padding:20px 14px 40px}
+  .charm{position:fixed;top:10px;font-size:1.6em;z-index:2;filter:drop-shadow(0 0 6px rgba(255,215,0,.7));animation:sway 4s ease-in-out infinite alternate}
+  .charm.l{left:14px}.charm.r{right:14px;animation-delay:2s}
+  @keyframes sway{ from{transform:rotate(-6deg)} to{transform:rotate(6deg)} }
+  h1{
+    font-family:'Cinzel Decorative',serif;text-align:center;font-size:1.35em;margin:14px 0 4px;
+    background:linear-gradient(90deg,#ffd700,#fff8dc,#b9f2ff,#ff8ec2,#ffd700);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    filter:drop-shadow(0 0 12px rgba(255,215,0,.35));
+  }
+  .zodiac-wheel{
+    text-align:center;font-size:1.15em;letter-spacing:6px;margin:2px 0 10px;
+    background:linear-gradient(90deg,#ffd700,#b9f2ff,#ffd700);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  h3{font-family:'Cinzel Decorative',serif;color:#ffe9a8;letter-spacing:1px;text-shadow:0 0 8px rgba(255,215,0,.3)}
+  button{
+    padding:10px 16px;border-radius:12px;cursor:pointer;margin:4px 2px;
+    font-family:'Quicksand',sans-serif;font-weight:700;font-size:1em;
+    background:linear-gradient(145deg,rgba(120,80,255,.25),rgba(60,30,140,.25));
+    border:1px solid rgba(255,215,0,.45);color:#f0ecff;
+    box-shadow:0 2px 10px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.2);
+  }
+  .blue{background:linear-gradient(145deg,#3d2f8a,#1e1560);border-color:#b9f2ff}
+  input,select{
+    padding:12px;margin:4px 0;border-radius:12px;border:1px solid rgba(185,242,255,.35);
+    background:rgba(20,12,60,.6);color:#fff;font-size:1em;font-family:'Quicksand',sans-serif;
+  }
+  #search{width:100%;border-color:rgba(255,215,0,.4);font-size:1.05em}
+  #search::placeholder{color:#a89dd9}
+  #login{max-width:340px;margin:40px auto;text-align:center}
+  #login input,#login button{width:100%}
+  #login button{background:linear-gradient(145deg,#ffd700,#c9982a);color:#1a1040;border:none;padding:12px;margin-top:8px;box-shadow:0 0 18px rgba(255,215,0,.4)}
+  #addbar{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}
+  #addbar input{width:100%}
+  #addbar button{grid-column:1/3;background:linear-gradient(145deg,#ffd700,#c9982a);color:#1a1040;border:none}
+  .item{
+    display:flex;align-items:center;gap:10px;padding:12px;margin:6px 0;border-radius:12px;
+    background:linear-gradient(145deg,rgba(90,60,200,.22),rgba(30,18,80,.30));
+    border:1px solid rgba(185,242,255,.3);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.15), 0 3px 10px rgba(0,0,0,.45);
+    position:relative;overflow:hidden;
+  }
+  .item::after{
+    content:'';position:absolute;top:0;left:-60%;width:40%;height:100%;
+    background:linear-gradient(105deg,transparent,rgba(255,255,255,.12),transparent);
+    animation:sheen 5s linear infinite;
+  }
+  @keyframes sheen{ 0%{left:-60%} 60%{left:130%} 100%{left:130%} }
+  .item.out{background:linear-gradient(145deg,rgba(180,20,90,.45),rgba(90,10,50,.5));border:1px solid #ff4d94;box-shadow:0 0 14px rgba(255,77,148,.4)}
+  .item.multi{background:linear-gradient(145deg,rgba(10,120,100,.4),rgba(5,60,50,.5));border:1px solid #4de3b8;box-shadow:0 0 14px rgba(77,227,184,.35)}
+  .item .name{flex:1;font-weight:700}
+  .item.out .name::after{content:'  ⛔ OUT';color:#ff9ecb;font-size:.78em;letter-spacing:1px}
+  .item.multi .name::after{content:'  ✨ STOCKED';color:#a8ffe4;font-size:.78em;letter-spacing:1px}
+  .qty{font-size:1.4em;font-weight:700;min-width:36px;text-align:center;text-shadow:0 0 10px rgba(185,242,255,.9)}
+  .pm{background:linear-gradient(145deg,#4a3aa5,#251a70);color:#fff;padding:8px 16px;font-size:1.15em;border-radius:10px;border:1px solid rgba(255,215,0,.4)}
+  .del{background:rgba(0,0,0,.35);border:1px solid #ff4d94;color:#ff9ecb;padding:8px 10px;border-radius:10px;font-size:1em}
+  .hdr{
+    background:linear-gradient(90deg,rgba(255,215,0,.18),rgba(255,215,0,.02));
+    border-left:3px solid #ffd700;padding:6px 12px;border-radius:6px;margin-top:14px;
+    font-weight:700;font-family:'Cinzel Decorative',serif;letter-spacing:1px;color:#ffe9a8;
+  }
+  #user{font-size:.8em;color:#b3a9e0;text-align:center;margin-bottom:6px}
+  p{color:#b3a9e0;text-align:center}
+  input[type=file]{color:#b3a9e0;font-size:.85em}
+  @media(min-width:768px){
+    .frame{max-width:960px}
+    #inventory{display:grid;grid-template-columns:1fr 1fr;column-gap:26px;align-items:start}
+    h1{font-size:1.8em}
+  }
+</style>
+</head>
+<body>
+<div class="charm l">🌙</div>
+<div class="charm r">🏮</div>
+<div class="frame">
+  <div id="login">
+    <h1>✦ Zodiac Shadows ✦</h1>
+    <div class="zodiac-wheel">♈♉♊♋♌♍♎♏♐♑♒♓</div>
+    <p>Sign in to sync your stars</p>
+    <input id="email" type="email" placeholder="Email">
+    <input id="pass" type="password" placeholder="Password">
+    <button onclick="login()">✦ Sign In ✦</button>
+  </div>
+  <div id="app" style="display:none">
+    <h1>✦ Zodiac Shadows ✦</h1>
+    <div class="zodiac-wheel">♈♉♊♋♌♍♎♏♐♑♒♓</div>
+    <div id="user"></div>
+    <input id="search" type="text" placeholder="🔍 Search the constellation..." oninput="render()">
+    <h3>✧ Inventory (<span id="count">0</span> shown)</h3>
+    <div id="inventory"><div id="list"></div></div>
+    <h3>✧ Add Manually</h3>
+    <div id="addbar">
+      <input id="nBrand" type="text" placeholder="Brand">
+      <input id="nColor" type="text" placeholder="Color name">
+      <button onclick="addItem()">✨ Add Item</button>
+    </div>
+    <h3>✧ Tools</h3>
+    <input type="file" accept=".csv" onchange="importCSV(event)">
+    <br>
+    <button class="blue" onclick="shareList()">📤 Share List</button>
+    <button class="blue" onclick="exportCSV()">💾 Backup CSV</button>
+    <button class="blue" onclick="logout()">🔒 Sign Out</button>
+  </div>
+</div>
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyAdQORg8wG4WHIEXj5w9l4TAZUnxtR3Wxk",
+  authDomain: "filament-stock-43efd.firebaseapp.com",
+  databaseURL: "https://filament-stock-43efd-default-rtdb.firebaseio.com",
+  projectId: "filament-stock-43efd",
+  storageBucket: "filament-stock-43efd.firebasestorage.app",
+  messagingSenderId: "427072456191",
+  appId: "1:427072456191:web:a38213af5e088f49bed3ca"
+};
+
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const fdb = firebase.database();
+const ROOT = fdb.ref('filament');
+
+let db = JSON.parse(localStorage.getItem('fil') || '{}');
+const cache = () => localStorage.setItem('fil', JSON.stringify(db));
+const keyOf = (b,c) => 'FT|' + b.trim() + '|' + c.trim();
+const safeKey = k => k.replace(/[.#$$$$$\/]/g, '_');
+function status(q){ return q==0 ? 'out' : (q>=2 ? 'multi' : ''); }
+
+function login(){
+  auth.signInWithEmailAndPassword(email.value, pass.value)
+    .catch(e => alert('Login failed: ' + e.message));
+}
+function logout(){ auth.signOut(); }
+
+auth.onAuthStateChanged(user => {
+  if(user){
+    document.getElementById('login').style.display='none';
+    document.getElementById('app').style.display='block';
+    document.getElementById('user').textContent = '✦ Synced as: ' + user.email + ' ✦';
+    ROOT.on('value', snap => {
+      const remote = snap.val() || {};
+      db = {};
+      for(const k in remote) db[k] = remote[k];
+      cache(); render();
+    });
+  } else {
+    document.getElementById('login').style.display='block';
+    document.getElementById('app').style.display='none';
+    ROOT.off();
+  }
+});
+
+function render(){
+  const q = document.getElementById('search').value.toLowerCase();
+  const list = document.getElementById('list');
+  const keys = Object.keys(db)
+    .filter(k => !q || (db[k].brand + ' ' + db[k].color).toLowerCase().includes(q))
+    .sort((a,b)=>{
+      const ba = db[a].brand.toLowerCase(), bb = db[b].brand.toLowerCase();
+      if(ba !== bb) return ba.localeCompare(bb);
+      return db[a].color.localeCompare(db[b].color);
+    });
+  document.getElementById('count').textContent = keys.length;
+  let lastBrand = '', html = '';
+  keys.map(k=>{
+    const i = db[k];
+    const ek = k.replace(/'/g,"\\'").replace(/"/g,'&quot;');
+    if(i.brand !== lastBrand){ lastBrand = i.brand; html += `<div class="hdr">✦ ${i.brand}</div>`; }
+    html += `<div class="item ${status(i.qty)}">
+      <div class="name">\${i.color}</div>
+      <button class="pm" onclick="chg('\${ek}',-1)">−</button>
+      <span class="qty">\${i.qty}</span>
+      <button class="pm" onclick="chg('\${ek}',1)">+</button>
+      <button class="del" onclick="removeItem('\${ek}')">🗑️</button>
+    </div>`;
+  });
+  list.innerHTML = html || '<p>' + (q ? 'No stars match "' + q + '"' : 'Nothing tracked yet. Import your CSV!') + '</p>';
+}
+
+function chg(k,n){
+  const q = Math.max(0, db[k].qty + n);
+  ROOT.child(safeKey(k) + '/qty').set(q);
+}
+
+function removeItem(k){
+  const i = db[k];
+  if(confirm('Remove ' + i.brand + ' — ' + i.color + ' from tracking?')){
+    ROOT.child(safeKey(k)).remove();
+  }
+}
+
+function addItem(){
+  const b = nBrand.value.trim(), c = nColor.value.trim();
+  if(!b || !c){ alert('Need both a brand and a color name.'); return; }
+  const k = keyOf(b, c);
+  if(db[k]){ alert('Already tracking ' + b + ' — ' + c + '.'); return; }
+  ROOT.child(safeKey(k)).set({brand:b, color:c, qty:0});
+  nBrand.value = ''; nColor.value = '';
+}
+
+function importCSV(e){
+  const f = e.target.files[0]; if(!f) return;
+  const r = new FileReader();
+  r.onload = () => {
+    let added = 0, skipped = 0;
+    r.result.split('\n').slice(1).forEach(line=>{
+      const cols = line.split(',').map(s=>s.trim().replace(/"/g,''));
+      const brand = cols[0], color = cols[1], qty = parseInt(cols[2]) || 0;
+      if(!brand || !color) return;
+      const k = keyOf(brand, color);
+      if(db[k]){ skipped++; }
+      else {
+        ROOT.child(safeKey(k)).set({brand, color, qty: qty});
+        added++;
+      }
+    });
+    alert(added + '
