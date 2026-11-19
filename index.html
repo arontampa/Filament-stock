@@ -4,143 +4,72 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0d0a2e">
-<title>✨ Zodiac Shadows Inventory</title>
+<meta name="theme-color" content="#1a1a2e">
+<title>Zodiac Shadows Inventory</title>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Quicksand:wght@500;700&display=swap');
-  *{box-sizing:border-box}
-  body{
-    font-family:'Quicksand',sans-serif;color:#f0ecff;margin:0;padding:0;min-height:100vh;
-    background:
-      radial-gradient(ellipse 60% 40% at 75% 15%, rgba(255,60,180,.35), transparent 60%),
-      radial-gradient(ellipse 50% 35% at 20% 25%, rgba(0,220,255,.28), transparent 60%),
-      radial-gradient(ellipse 70% 45% at 50% 60%, rgba(150,60,255,.30), transparent 65%),
-      radial-gradient(ellipse 40% 30% at 85% 75%, rgba(255,100,60,.22), transparent 60%),
-      radial-gradient(ellipse 55% 40% at 10% 85%, rgba(0,255,200,.15), transparent 60%),
-      linear-gradient(180deg, #0d0a2e 0%, #1a0f45 50%, #0a0724 100%);
-    background-attachment:fixed;
-  }
-  body::before{
-    content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
-    background-image:
-      radial-gradient(1.5px 1.5px at 15% 20%, #fff 50%, transparent 51%),
-      radial-gradient(1px 1px at 35% 60%, #fff 50%, transparent 51%),
-      radial-gradient(2px 2px at 55% 15%, #ffe9a8 50%, transparent 51%),
-      radial-gradient(1px 1px at 75% 40%, #fff 50%, transparent 51%),
-      radial-gradient(1.5px 1.5px at 90% 70%, #c9b8ff 50%, transparent 51%),
-      radial-gradient(1px 1px at 5% 75%, #fff 50%, transparent 51%),
-      radial-gradient(1.5px 1.5px at 45% 85%, #fff 50%, transparent 51%),
-      radial-gradient(2px 2px at 65% 55%, #b9f2ff 50%, transparent 51%);
-    opacity:.8;animation:twinkle 5s ease-in-out infinite alternate;
-  }
-  @keyframes twinkle{ from{opacity:.45} to{opacity:.95} }
-  .frame{position:relative;z-index:1;max-width:680px;margin:0 auto;padding:20px 14px 40px}
-  .charm{position:fixed;top:10px;font-size:1.6em;z-index:2;filter:drop-shadow(0 0 6px rgba(255,215,0,.7));animation:sway 4s ease-in-out infinite alternate}
-  .charm.l{left:14px}.charm.r{right:14px;animation-delay:2s}
-  @keyframes sway{ from{transform:rotate(-6deg)} to{transform:rotate(6deg)} }
-  h1{
-    font-family:'Cinzel Decorative',serif;text-align:center;font-size:1.35em;margin:14px 0 4px;
-    background:linear-gradient(90deg,#ffd700,#fff8dc,#b9f2ff,#ff8ec2,#ffd700);
-    -webkit-background-clip:text;background-clip:text;color:transparent;
-    filter:drop-shadow(0 0 12px rgba(255,215,0,.35));
-  }
-  .zodiac-wheel{
-    text-align:center;font-size:1.15em;letter-spacing:6px;margin:2px 0 10px;
-    background:linear-gradient(90deg,#ffd700,#b9f2ff,#ffd700);
-    -webkit-background-clip:text;background-clip:text;color:transparent;
-  }
-  h3{font-family:'Cinzel Decorative',serif;color:#ffe9a8;letter-spacing:1px;text-shadow:0 0 8px rgba(255,215,0,.3)}
-  button{
-    padding:10px 16px;border-radius:12px;cursor:pointer;margin:4px 2px;
-    font-family:'Quicksand',sans-serif;font-weight:700;font-size:1em;
-    background:linear-gradient(145deg,rgba(120,80,255,.25),rgba(60,30,140,.25));
-    border:1px solid rgba(255,215,0,.45);color:#f0ecff;
-    box-shadow:0 2px 10px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.2);
-  }
-  .blue{background:linear-gradient(145deg,#3d2f8a,#1e1560);border-color:#b9f2ff}
-  input,select{
-    padding:12px;margin:4px 0;border-radius:12px;border:1px solid rgba(185,242,255,.35);
-    background:rgba(20,12,60,.6);color:#fff;font-size:1em;font-family:'Quicksand',sans-serif;
-  }
-  #search{width:100%;border-color:rgba(255,215,0,.4);font-size:1.05em}
-  #search::placeholder{color:#a89dd9}
+  body{font-family:sans-serif;background:#1a1a2e;color:#eee;margin:0;padding:12px}
+  h1{font-size:1.2em}
+  h3{color:#c9b8ff}
+  button{padding:10px 14px;border:none;border-radius:8px;font-size:1em;cursor:pointer;margin:4px 2px}
+  .blue{background:#0f3460;color:#fff}
+  #search{width:100%;box-sizing:border-box;padding:12px;margin:8px 0;border-radius:8px;border:none;font-size:1.05em}
   #login{max-width:340px;margin:40px auto;text-align:center}
   #login input,#login button{width:100%}
-  #login button{background:linear-gradient(145deg,#ffd700,#c9982a);color:#1a1040;border:none;padding:12px;margin-top:8px;box-shadow:0 0 18px rgba(255,215,0,.4)}
+  #login input{padding:12px;margin:4px 0;border-radius:8px;border:none;font-size:1em}
+  #login button{background:#4caf50;color:#fff;padding:12px;font-weight:bold;margin-top:8px}
+  input{padding:10px;margin:4px 0;border-radius:6px;border:none}
   #addbar{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}
-  #addbar input{width:100%}
-  #addbar button{grid-column:1/3;background:linear-gradient(145deg,#ffd700,#c9982a);color:#1a1040;border:none}
-  .item{
-    display:flex;align-items:center;gap:10px;padding:12px;margin:6px 0;border-radius:12px;
-    background:linear-gradient(145deg,rgba(90,60,200,.22),rgba(30,18,80,.30));
-    border:1px solid rgba(185,242,255,.3);
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.15), 0 3px 10px rgba(0,0,0,.45);
-    position:relative;overflow:hidden;
-  }
-  .item::after{
-    content:'';position:absolute;top:0;left:-60%;width:40%;height:100%;
-    background:linear-gradient(105deg,transparent,rgba(255,255,255,.12),transparent);
-    animation:sheen 5s linear infinite;
-  }
-  @keyframes sheen{ 0%{left:-60%} 60%{left:130%} 100%{left:130%} }
-  .item.out{background:linear-gradient(145deg,rgba(180,20,90,.45),rgba(90,10,50,.5));border:1px solid #ff4d94;box-shadow:0 0 14px rgba(255,77,148,.4)}
-  .item.multi{background:linear-gradient(145deg,rgba(10,120,100,.4),rgba(5,60,50,.5));border:1px solid #4de3b8;box-shadow:0 0 14px rgba(77,227,184,.35)}
-  .item .name{flex:1;font-weight:700}
-  .item.out .name::after{content:'  ⛔ OUT';color:#ff9ecb;font-size:.78em;letter-spacing:1px}
-  .item.multi .name::after{content:'  ✨ STOCKED';color:#a8ffe4;font-size:.78em;letter-spacing:1px}
-  .qty{font-size:1.4em;font-weight:700;min-width:36px;text-align:center;text-shadow:0 0 10px rgba(185,242,255,.9)}
-  .pm{background:linear-gradient(145deg,#4a3aa5,#251a70);color:#fff;padding:8px 16px;font-size:1.15em;border-radius:10px;border:1px solid rgba(255,215,0,.4)}
-  .del{background:rgba(0,0,0,.35);border:1px solid #ff4d94;color:#ff9ecb;padding:8px 10px;border-radius:10px;font-size:1em}
-  .hdr{
-    background:linear-gradient(90deg,rgba(255,215,0,.18),rgba(255,215,0,.02));
-    border-left:3px solid #ffd700;padding:6px 12px;border-radius:6px;margin-top:14px;
-    font-weight:700;font-family:'Cinzel Decorative',serif;letter-spacing:1px;color:#ffe9a8;
-  }
-  #user{font-size:.8em;color:#b3a9e0;text-align:center;margin-bottom:6px}
-  p{color:#b3a9e0;text-align:center}
-  input[type=file]{color:#b3a9e0;font-size:.85em}
+  #addbar input{width:100%;box-sizing:border-box}
+  #addbar button{grid-column:1/3;background:#4caf50;color:#fff}
+  .item{display:flex;align-items:center;gap:10px;padding:12px 10px;margin:6px 0;border-radius:8px;background:#16213e}
+  .item.out{background:#5c1f1f;border:2px solid #f44336}
+  .item.multi{background:#1d4a24;border:2px solid #4caf50}
+  .item .name{flex:1;font-weight:bold}
+  .item.out .name::after{content:'  ⛔ OUT';color:#ff8a80;font-size:.8em}
+  .item.multi .name::after{content:'  ✅ STOCKED';color:#a5d6a7;font-size:.8em}
+  .qty{font-size:1.4em;font-weight:bold;min-width:34px;text-align:center}
+  .pm{background:rgba(0,0,0,.35);color:#fff;padding:8px 16px;font-size:1.1em}
+  .del{background:rgba(0,0,0,.35);border:1px solid #f44336;color:#ff8a80;padding:8px 10px;border-radius:8px;font-size:1em}
+  .hdr{background:#0f3460;padding:6px 10px;border-radius:6px;margin-top:12px;font-weight:bold}
+  #user{font-size:.8em;color:#8892b0;text-align:center;margin-bottom:6px}
+  p{color:#8892b0;text-align:center}
+  input[type=file]{color:#8892b0;font-size:.85em}
   @media(min-width:768px){
-    .frame{max-width:960px}
+    body{max-width:960px;margin:0 auto}
     #inventory{display:grid;grid-template-columns:1fr 1fr;column-gap:26px;align-items:start}
-    h1{font-size:1.8em}
+    h1{font-size:1.6em}
   }
 </style>
 </head>
 <body>
-<div class="charm l">🌙</div>
-<div class="charm r">🏮</div>
-<div class="frame">
-  <div id="login">
-    <h1>✦ Zodiac Shadows ✦</h1>
-    <div class="zodiac-wheel">♈♉♊♋♌♍♎♏♐♑♒♓</div>
-    <p>Sign in to sync your stars</p>
-    <input id="email" type="email" placeholder="Email">
-    <input id="pass" type="password" placeholder="Password">
-    <button onclick="login()">✦ Sign In ✦</button>
+<div id="login">
+  <h1>🌑 Zodiac Shadows Inventory</h1>
+  <p>Sign in to sync</p>
+  <input id="email" type="email" placeholder="Email">
+  <input id="pass" type="password" placeholder="Password">
+  <button onclick="login()">Sign In</button>
+</div>
+<div id="app" style="display:none">
+  <h1>🌑 Zodiac Shadows Inventory</h1>
+  <div id="user"></div>
+  <input id="search" type="text" placeholder="🔍 Search brand or color..." oninput="render()">
+  <h3>Inventory (<span id="count">0</span> shown)</h3>
+  <div id="inventory"><div id="list"></div></div>
+  <h3>Add Manually</h3>
+  <div id="addbar">
+    <input id="nBrand" type="text" placeholder="Brand">
+    <input id="nColor" type="text" placeholder="Color name">
+    <button onclick="addItem()">Add Item</button>
   </div>
-  <div id="app" style="display:none">
-    <h1>✦ Zodiac Shadows ✦</h1>
-    <div class="zodiac-wheel">♈♉♊♋♌♍♎♏♐♑♒♓</div>
-    <div id="user"></div>
-    <input id="search" type="text" placeholder="🔍 Search the constellation..." oninput="render()">
-    <h3>✧ Inventory (<span id="count">0</span> shown)</h3>
-    <div id="inventory"><div id="list"></div></div>
-    <h3>✧ Add Manually</h3>
-    <div id="addbar">
-      <input id="nBrand" type="text" placeholder="Brand">
-      <input id="nColor" type="text" placeholder="Color name">
-      <button onclick="addItem()">✨ Add Item</button>
-    </div>
-    <h3>✧ Tools</h3>
-    <input type="file" accept=".csv" onchange="importCSV(event)">
-    <br>
-    <button class="blue" onclick="shareList()">📤 Share List</button>
-    <button class="blue" onclick="exportCSV()">💾 Backup CSV</button>
-    <button class="blue" onclick="logout()">🔒 Sign Out</button>
-  </div>
+  <h3>Tools</h3>
+  <input type="file" accept=".csv" onchange="importCSV(event)">
+  <br>
+  <button class="blue" onclick="shareList()">📤 Share List</button>
+  <button class="blue" onclick="exportCSV()">💾 Backup CSV</button>
+  <button class="blue" onclick="logout()">🔒 Sign Out</button>
 </div>
 <script>
 const firebaseConfig = {
@@ -165,31 +94,22 @@ const safeKey = k => k.replace(/[.#$$$$$\/]/g, '_');
 function status(q){ return q==0 ? 'out' : (q>=2 ? 'multi' : ''); }
 
 function login(){
-  console.log('Login attempt with:', email.value);
-  if(!email.value || !pass.value){ alert('Enter both email and password.'); return; }
   auth.signInWithEmailAndPassword(email.value, pass.value)
-    .then(() => alert('Sign-in SUCCEEDED'))
-    .catch(e => alert('Sign-in FAILED: ' + e.code + ' — ' + e.message));
+    .catch(e => alert('Login failed: ' + e.message));
 }
+function logout(){ auth.signOut(); }
 
 auth.onAuthStateChanged(user => {
-  alert('Auth state: ' + (user ? 'LOGGED IN as ' + user.email : 'logged out'));
   if(user){
     document.getElementById('login').style.display='none';
     document.getElementById('app').style.display='block';
-    document.getElementById('user').textContent = '✦ Synced as: ' + user.email + ' ✦';
+    document.getElementById('user').textContent = 'Synced as: ' + user.email;
     ROOT.on('value', snap => {
       const remote = snap.val() || {};
       db = {};
       for(const k in remote) db[k] = remote[k];
       cache(); render();
-    }, err => alert('Database read FAILED: ' + err.code));
-  } else {
-    document.getElementById('login').style.display='block';
-    document.getElementById('app').style.display='none';
-    ROOT.off();
-  }
-});
+    });
   } else {
     document.getElementById('login').style.display='block';
     document.getElementById('app').style.display='none';
@@ -212,16 +132,16 @@ function render(){
   keys.map(k=>{
     const i = db[k];
     const ek = k.replace(/'/g,"\\'").replace(/"/g,'&quot;');
-    if(i.brand !== lastBrand){ lastBrand = i.brand; html += `<div class="hdr">✦ ${i.brand}</div>`; }
+    if(i.brand !== lastBrand){ lastBrand = i.brand; html += `<div class="hdr">${i.brand}</div>`; }
     html += `<div class="item ${status(i.qty)}">
-      <div class="name">\${i.color}</div>
-      <button class="pm" onclick="chg('\${ek}',-1)">−</button>
-      <span class="qty">\${i.qty}</span>
-      <button class="pm" onclick="chg('\${ek}',1)">+</button>
-      <button class="del" onclick="removeItem('\${ek}')">🗑️</button>
+      <div class="name">${i.color}</div>
+      <button class="pm" onclick="chg('${ek}',-1)">−</button>
+      <span class="qty">${i.qty}</span>
+      <button class="pm" onclick="chg('${ek}',1)">+</button>
+      <button class="del" onclick="removeItem('${ek}')">🗑️</button>
     </div>`;
   });
-  list.innerHTML = html || '<p>' + (q ? 'No stars match "' + q + '"' : 'Nothing tracked yet. Import your CSV!') + '</p>';
+  list.innerHTML = html || '<p>' + (q ? 'No matches for "' + q + '"' : 'Nothing tracked yet. Import your CSV!') + '</p>';
 }
 
 function chg(k,n){
@@ -261,4 +181,34 @@ function importCSV(e){
         added++;
       }
     });
-    alert(added + '
+    alert(added + ' new item(s) added with their CSV quantities. ' + skipped + ' existing kept as-is.');
+  };
+  r.readAsText(f);
+}
+
+function makeCSV(){
+  let csv = 'Brand,Color,Qty\n';
+  for(const k in db) csv += `"${db[k].brand}","${db[k].color}",${db[k].qty}\n`;
+  return csv;
+}
+
+function exportCSV(){
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([makeCSV()],{type:'text/csv'}));
+  a.download = 'filament_backup.csv'; a.click();
+}
+
+async function shareList(){
+  const file = new File([makeCSV()], 'filament_list.csv', {type:'text/csv'});
+  if(navigator.canShare && navigator.canShare({files:[file]})){
+    await navigator.share({files:[file], title:'Zodiac Shadows Inventory'});
+  } else {
+    await navigator.clipboard.writeText(makeCSV());
+    alert('CSV copied to clipboard.');
+  }
+}
+
+if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
+</script>
+</body>
+</html>
