@@ -14,25 +14,16 @@
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 <style>
   :root{
-    --void:#07040f;
-    --deep:#120a2c;
-    --lilac:#c9b8ff;
-    --ice:#bfe9ff;
-    --gold:#ffd88a;
-    --rose:#ff9ecb;
-    --aqua:#7ef0e0;
-    --text:#efe9ff;
-    --muted:#a99cd8;
+    --void:#07040f; --deep:#120a2c;
+    --lilac:#c9b8ff; --ice:#bfe9ff; --gold:#ffd88a;
+    --rose:#ff9ecb; --aqua:#7ef0e0;
+    --text:#efe9ff; --muted:#a99cd8;
   }
-
   *{box-sizing:border-box}
 
   body{
     font-family:"Quicksand","Segoe UI",system-ui,sans-serif;
-    margin:0;
-    padding:14px;
-    color:var(--text);
-    min-height:100vh;
+    margin:0; padding:14px; color:var(--text); min-height:100vh;
     background:
       radial-gradient(120vmax 80vmax at 50% -20%, #2a1a5e 0%, transparent 62%),
       radial-gradient(85vmax 62vmax at 108% 108%, #14324a 0%, transparent 58%),
@@ -41,34 +32,28 @@
     background-attachment:fixed;
   }
 
-  /* ── starfield ───────────────────────────────────────── */
   body::before{
-    content:"";
-    position:fixed; inset:0; z-index:0; pointer-events:none;
+    content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
     background-image:
-      radial-gradient(1.6px 1.6px at 22px 34px, #ffffff, transparent 60%),
+      radial-gradient(1.6px 1.6px at 22px 34px, #fff, transparent 60%),
       radial-gradient(1px 1px at 92px 118px, #cfe8ff, transparent 60%),
       radial-gradient(1.6px 1.6px at 168px 62px, #ffe9b8, transparent 60%),
-      radial-gradient(1px 1px at 224px 172px, #ffffff, transparent 60%),
+      radial-gradient(1px 1px at 224px 172px, #fff, transparent 60%),
       radial-gradient(1px 1px at 48px 206px, #e0d4ff, transparent 60%),
       radial-gradient(1.4px 1.4px at 268px 22px, #b9e8ff, transparent 60%),
       radial-gradient(1px 1px at 140px 250px, #ffd6ec, transparent 60%),
-      radial-gradient(1.2px 1.2px at 292px 268px, #ffffff, transparent 60%),
-      radial-gradient(1px 1px at 388px 96px, #ffffff, transparent 60%),
+      radial-gradient(1.2px 1.2px at 292px 268px, #fff, transparent 60%),
+      radial-gradient(1px 1px at 388px 96px, #fff, transparent 60%),
       radial-gradient(1.3px 1.3px at 412px 340px, #d8ccff, transparent 60%),
-      radial-gradient(1px 1px at 330px 410px, #ffffff, transparent 60%),
+      radial-gradient(1px 1px at 330px 410px, #fff, transparent 60%),
       radial-gradient(1.2px 1.2px at 76px 396px, #ffe9b8, transparent 60%);
-    background-size:460px 460px;
-    background-repeat:repeat;
-    opacity:.55;
+    background-size:460px 460px; opacity:.55;
     animation:twinkle 7s ease-in-out infinite alternate;
   }
   @keyframes twinkle{ from{opacity:.3} to{opacity:.8} }
 
-  /* ── faceted light wash + vignette ───────────────────── */
   body::after{
-    content:"";
-    position:fixed; inset:0; z-index:0; pointer-events:none;
+    content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
     background:
       conic-gradient(from 210deg at 15% -5%,
         rgba(255,255,255,.07), transparent 22%,
@@ -78,56 +63,29 @@
       radial-gradient(1200px 600px at 50% -10%, rgba(201,184,255,.16), transparent 60%),
       radial-gradient(900px 500px at 92% 112%, rgba(126,240,224,.10), transparent 60%);
   }
-
   #login,#app{position:relative; z-index:1}
 
-  /* ── headings ────────────────────────────────────────── */
   h1{
-    font-family:"Cinzel",Georgia,serif;
-    font-size:1.25em;
-    letter-spacing:.09em;
-    margin:.4em 0 .2em;
+    font-family:"Cinzel",Georgia,serif; font-size:1.25em;
+    letter-spacing:.09em; margin:.4em 0 .2em;
     background:linear-gradient(92deg,#ffd88a 0%,#c9b8ff 34%,#7ef0e0 66%,#ff9ecb 100%);
-    -webkit-background-clip:text; background-clip:text;
-    color:transparent;
-    filter:drop-shadow(0 0 14px rgba(201,184,255,.35));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
   }
-  h1::before,h1::after{
-    color:var(--gold);
-    font-size:.75em;
-    vertical-align:middle;
-    margin:0 .4em;
-    opacity:.85;
-  }
-  h1::before{content:"✦"}
-  h1::after{content:"✦"}
+  h1::before,h1::after{color:var(--gold); font-size:.75em; vertical-align:middle; margin:0 .4em; opacity:.85}
+  h1::before{content:"✦"} h1::after{content:"✦"}
 
   h3{
-    font-family:"Cinzel",Georgia,serif;
-    font-size:.86em;
-    letter-spacing:.16em;
-    text-transform:uppercase;
-    color:var(--lilac);
-    margin:22px 0 8px;
-    padding-bottom:6px;
-    border-bottom:1px solid rgba(201,184,255,.18);
+    font-family:"Cinzel",Georgia,serif; font-size:.86em; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--lilac); margin:22px 0 8px;
+    padding-bottom:6px; border-bottom:1px solid rgba(201,184,255,.18);
     text-shadow:0 0 16px rgba(201,184,255,.35);
   }
 
-  /* ── gem buttons ─────────────────────────────────────── */
   button{
-    position:relative;
-    overflow:hidden;
-    padding:11px 16px;
-    border:1px solid rgba(255,255,255,.22);
-    border-radius:13px;
-    font-family:inherit;
-    font-size:1em;
-    font-weight:700;
-    letter-spacing:.02em;
-    color:#fff;
-    cursor:pointer;
-    margin:4px 2px;
+    position:relative; overflow:hidden; padding:11px 16px;
+    border:1px solid rgba(255,255,255,.22); border-radius:13px;
+    font-family:inherit; font-size:1em; font-weight:700; letter-spacing:.02em;
+    color:#fff; cursor:pointer; margin:4px 2px;
     background:linear-gradient(150deg,#5b3ec8 0%,#2a1a63 52%,#40268f 100%);
     box-shadow:
       inset 0 1px 0 rgba(255,255,255,.55),
@@ -136,171 +94,121 @@
     transition:transform .12s ease, box-shadow .25s ease, filter .2s ease;
   }
   button::after{
-    content:"";
-    position:absolute; top:-60%; left:-130%;
-    width:55%; height:230%;
+    content:""; position:absolute; top:-60%; left:-130%; width:55%; height:230%;
     background:linear-gradient(75deg,transparent,rgba(255,255,255,.7),transparent);
-    transform:rotate(18deg);
-    transition:left .6s cubic-bezier(.3,.7,.4,1);
+    transform:rotate(18deg); transition:left .6s cubic-bezier(.3,.7,.4,1);
     pointer-events:none;
   }
   button:hover::after{left:135%}
-  button:hover{
-    transform:translateY(-1px);
-    filter:brightness(1.1);
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,.6),
-      inset 0 -3px 8px rgba(0,0,0,.5),
-      0 10px 26px rgba(126,240,224,.28);
-  }
+  button:hover{transform:translateY(-1px); filter:brightness(1.1)}
   button:active{transform:translateY(1px) scale(.99)}
 
-  .blue{
-    background:linear-gradient(150deg,#4b3bb8 0%,#241a5e 55%,#3b2a91 100%);
+  .blue{background:linear-gradient(150deg,#4b3bb8 0%,#241a5e 55%,#3b2a91 100%)}
+
+  /* ── filter chips ────────────────────────────────────── */
+  #filters{display:flex; gap:8px; margin:10px 0 4px; flex-wrap:wrap}
+  .chip{
+    flex:1 1 auto; min-width:0; margin:0; padding:9px 12px;
+    font-size:.82em; letter-spacing:.06em; text-transform:uppercase;
+    border-radius:11px; color:#cfc4f5;
+    background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.015));
+    border:1px solid rgba(201,184,255,.22);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.14);
+  }
+  .chip::after{display:none}
+  .chip span{
+    display:inline-block; margin-left:5px; padding:1px 6px; border-radius:999px;
+    font-size:.9em; background:rgba(0,0,0,.35); color:var(--lilac);
+  }
+  .chip.is-active{
+    color:#fff;
+    background:linear-gradient(150deg,#5b3ec8 0%,#2a1a63 55%,#40268f 100%);
+    border-color:rgba(255,255,255,.35);
     box-shadow:
       inset 0 1px 0 rgba(255,255,255,.5),
-      inset 0 -3px 8px rgba(0,0,0,.5),
-      0 6px 20px rgba(75,59,184,.42);
+      0 0 18px rgba(126,240,224,.25);
   }
+  .chip.is-active span{background:rgba(0,0,0,.45); color:#fff}
 
-  /* ── login panel ─────────────────────────────────────── */
+  /* ── login ───────────────────────────────────────────── */
   #login{
-    max-width:360px;
-    margin:52px auto;
-    padding:28px 24px 32px;
-    text-align:center;
-    border-radius:24px;
-    border:1px solid rgba(201,184,255,.3);
+    max-width:360px; margin:52px auto; padding:28px 24px 32px; text-align:center;
+    border-radius:24px; border:1px solid rgba(201,184,255,.3);
     background:
       linear-gradient(150deg, rgba(255,255,255,.10), rgba(255,255,255,.015) 46%, rgba(255,255,255,.06)),
       linear-gradient(160deg,#1b1240,#110a2a 70%,#160e34);
-    box-shadow:
-      0 0 0 1px rgba(255,255,255,.05),
-      0 26px 64px rgba(0,0,0,.65),
-      0 0 90px rgba(91,62,200,.28);
+    box-shadow:0 0 0 1px rgba(255,255,255,.05),0 26px 64px rgba(0,0,0,.65),0 0 90px rgba(91,62,200,.28);
     backdrop-filter:blur(10px);
   }
   #login input,#login button{width:100%}
   #login input{margin:6px 0}
   #login button{
-    margin-top:14px;
-    padding:13px;
-    font-size:1.02em;
+    margin-top:14px; padding:13px; font-size:1.02em;
     background:linear-gradient(150deg,#1fbf9a 0%,#0b6b58 55%,#12927a 100%);
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,.55),
-      inset 0 -3px 8px rgba(0,0,0,.45),
-      0 8px 24px rgba(31,191,154,.35);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 8px 24px rgba(31,191,154,.35);
   }
 
   /* ── inputs ──────────────────────────────────────────── */
   input{
-    padding:11px 13px;
-    margin:4px 0;
-    border-radius:12px;
-    border:1px solid rgba(201,184,255,.28);
-    font-family:inherit;
-    font-size:1em;
+    padding:11px 13px; margin:4px 0; border-radius:12px;
+    border:1px solid rgba(201,184,255,.28); font-family:inherit; font-size:1em;
     color:#f3eeff;
     background:linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.02));
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,.16),
-      inset 0 -8px 16px rgba(0,0,0,.3);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.16), inset 0 -8px 16px rgba(0,0,0,.3);
     transition:border-color .2s, box-shadow .2s;
   }
   input::placeholder{color:#9487c4}
   input:focus{
-    outline:none;
-    border-color:rgba(126,240,224,.75);
-    box-shadow:
-      0 0 0 3px rgba(126,240,224,.14),
-      0 0 22px rgba(126,240,224,.22),
-      inset 0 1px 0 rgba(255,255,255,.2);
+    outline:none; border-color:rgba(126,240,224,.75);
+    box-shadow:0 0 0 3px rgba(126,240,224,.14),0 0 22px rgba(126,240,224,.22);
   }
   input[type=file]{
-    color:var(--muted);
-    font-size:.85em;
-    background:none;
-    border:none;
-    box-shadow:none;
-    padding:6px 0;
+    color:var(--muted); font-size:.85em; background:none; border:none;
+    box-shadow:none; padding:6px 0;
   }
 
   #search{
-    width:100%;
-    padding:14px 16px;
-    margin:12px 0;
-    font-size:1.05em;
-    border-radius:15px;
-    border:1px solid rgba(201,184,255,.32);
-    background:
-      linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.025)),
-      rgba(20,12,48,.6);
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,.18),
-      0 10px 28px rgba(0,0,0,.4);
+    width:100%; padding:14px 16px; margin:12px 0 6px; font-size:1.05em;
+    border-radius:15px; border:1px solid rgba(201,184,255,.32);
+    background:linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.025)), rgba(20,12,48,.6);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 10px 28px rgba(0,0,0,.4);
     backdrop-filter:blur(8px);
   }
   #search:focus{
-    outline:none;
-    border-color:rgba(126,240,224,.85);
-    box-shadow:
-      0 0 0 3px rgba(126,240,224,.16),
-      0 0 30px rgba(126,240,224,.28),
-      inset 0 1px 0 rgba(255,255,255,.25);
+    outline:none; border-color:rgba(126,240,224,.85);
+    box-shadow:0 0 0 3px rgba(126,240,224,.16),0 0 30px rgba(126,240,224,.28);
   }
 
-  /* ── add bar ─────────────────────────────────────────── */
-  #addbar{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:8px;
-    margin:10px 0;
-  }
+  #addbar{display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:10px 0}
   #addbar input{width:100%}
   #addbar button{
     grid-column:1/3;
     background:linear-gradient(150deg,#1fbf9a 0%,#0b6b58 55%,#12927a 100%);
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,.55),
-      inset 0 -3px 8px rgba(0,0,0,.45),
-      0 8px 24px rgba(31,191,154,.32);
   }
 
   /* ── brand chip ──────────────────────────────────────── */
   .hdr{
-    display:flex;
-    align-items:center;
-    gap:9px;
-    margin-top:18px;
-    padding:8px 14px;
-    border-radius:0 12px 12px 0;
-    border-left:3px solid var(--gold);
+    display:flex; align-items:center; gap:9px; margin-top:18px; padding:8px 14px;
+    border-radius:0 12px 12px 0; border-left:3px solid var(--gold);
     background:linear-gradient(90deg, rgba(91,62,200,.55), rgba(59,30,115,.12));
-    font-family:"Cinzel",Georgia,serif;
-    font-size:.82em;
-    font-weight:700;
-    letter-spacing:.14em;
-    text-transform:uppercase;
-    color:#f2ecff;
+    font-family:"Cinzel",Georgia,serif; font-size:.82em; font-weight:700;
+    letter-spacing:.14em; text-transform:uppercase; color:#f2ecff;
     box-shadow:0 0 22px rgba(255,216,138,.14);
   }
   .hdr::before{
-    content:"✦";
-    color:var(--gold);
-    font-size:1.1em;
+    content:"✦"; color:var(--gold); font-size:1.1em;
     text-shadow:0 0 10px rgba(255,216,138,.8);
   }
 
-  /* ── faceted gem cards ───────────────────────────────── */
+  /* ── item row: grid so nothing can be crushed ────────── */
   .item{
     position:relative;
-    display:flex;
+    display:grid;
+    grid-template-columns:auto minmax(0,1fr) auto auto auto auto;
     align-items:center;
-    gap:12px;
-    padding:14px 14px;
-    margin:8px 0;
-    min-width:0;
+    column-gap:7px;
+    padding:11px;
+    margin:0 0 10px;
     border-radius:16px;
     overflow:hidden;
     border:1px solid rgba(201,184,255,.22);
@@ -312,15 +220,10 @@
       inset 0 -10px 22px rgba(0,0,0,.35),
       0 10px 26px rgba(0,0,0,.45);
   }
-
-  /* cut-stone lattice */
   .item::before{
-    content:"";
-    position:absolute; inset:0;
-    pointer-events:none;
+    content:""; position:absolute; inset:0; pointer-events:none;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='0.07' stroke-width='1'%3E%3Cpath d='M60 0 L120 60 L60 120 L0 60 Z'/%3E%3Cpath d='M0 0 L60 60 L0 120'/%3E%3Cpath d='M120 0 L60 60 L120 120'/%3E%3Cpath d='M0 60 L120 60'/%3E%3C/g%3E%3C/svg%3E");
-    background-size:120px 120px;
-    opacity:.85;
+    background-size:120px 120px; opacity:.85;
   }
 
   .item.out{
@@ -328,176 +231,113 @@
       radial-gradient(130% 95% at 0% 0%, rgba(255,255,255,.14), transparent 56%),
       linear-gradient(160deg,#4d1030 0%,#2a0a1c 58%,#3a0d26 100%);
     border-color:rgba(255,138,128,.55);
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,.16),
-      inset 0 -10px 22px rgba(0,0,0,.4),
-      0 0 26px rgba(244,67,54,.32);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 0 26px rgba(244,67,54,.32);
   }
   .item.multi{
     background:
       radial-gradient(130% 95% at 0% 0%, rgba(255,255,255,.14), transparent 56%),
       linear-gradient(160deg,#0e3f37 0%,#092a28 58%,#0d3a35 100%);
     border-color:rgba(126,240,224,.55);
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,.16),
-      inset 0 -10px 22px rgba(0,0,0,.4),
-      0 0 26px rgba(126,240,224,.28);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 0 26px rgba(126,240,224,.28);
   }
 
-  /* faceted gem swatch — hue derived from color name */
+  /* ── gem swatch ──────────────────────────────────────── */
   .gem{
-    position:relative;
-    z-index:1;
-    flex:0 0 auto;
-    width:26px; height:26px;
-    border-radius:50%;
-    background:
-      conic-gradient(from 20deg,
-        hsl(var(--h) 88% 74%) 0deg,
-        hsl(calc(var(--h) + 42) 92% 58%) 55deg,
-        hsl(var(--h) 78% 86%) 110deg,
-        hsl(calc(var(--h) + 42) 92% 58%) 175deg,
-        hsl(var(--h) 88% 74%) 240deg,
-        hsl(calc(var(--h) - 30) 85% 64%) 300deg,
-        hsl(var(--h) 88% 74%) 360deg);
+    --h:260; --s:80%; --l:62%;
+    position:relative; z-index:1; flex:0 0 auto;
+    width:20px; height:20px; border-radius:50%;
+    background:conic-gradient(from 20deg,
+      hsl(var(--h) var(--s) calc(var(--l) + 12%)) 0deg,
+      hsl(calc(var(--h) + 38) var(--s) calc(var(--l) - 12%)) 55deg,
+      hsl(var(--h) var(--s) calc(var(--l) + 22%)) 110deg,
+      hsl(calc(var(--h) + 38) var(--s) calc(var(--l) - 8%)) 175deg,
+      hsl(var(--h) var(--s) calc(var(--l) + 10%)) 240deg,
+      hsl(calc(var(--h) - 28) var(--s) calc(var(--l) - 10%)) 300deg,
+      hsl(var(--h) var(--s) calc(var(--l) + 12%)) 360deg);
     box-shadow:
-      inset 0 0 0 1px rgba(255,255,255,.6),
-      inset 0 -4px 8px rgba(0,0,0,.5),
-      inset 2px 2px 6px rgba(255,255,255,.5),
-      0 0 14px hsl(var(--h) 90% 65% / .5);
+      inset 0 0 0 1px rgba(255,255,255,.55),
+      inset 0 -3px 7px rgba(0,0,0,.5),
+      0 0 12px hsl(var(--h) var(--s) var(--l) / .45);
   }
   .gem::after{
-    content:"";
-    position:absolute;
-    top:3px; left:5px;
-    width:9px; height:7px;
-    border-radius:50%;
-    background:rgba(255,255,255,.85);
-    filter:blur(1.5px);
+    content:""; position:absolute; top:2px; left:4px; width:7px; height:5px;
+    border-radius:50%; background:rgba(255,255,255,.85); filter:blur(1.2px);
   }
 
-  .item .name{
-    flex:1;
-    min-width:0;
-    position:relative;
-    z-index:1;
-    font-weight:600;
-    letter-spacing:.015em;
-    color:#f6f2ff;
-    text-shadow:0 1px 2px rgba(0,0,0,.5);
+  /* ── name block ──────────────────────────────────────── */
+  .name{
+    position:relative; z-index:1; min-width:0;
+    display:flex; flex-direction:column; gap:4px;
   }
-  .item.out .name::after{
-    content:'  ⛔ OUT';
-    color:#ffb0a6;
-    font-size:.78em;
-    letter-spacing:.08em;
+  .label{
+    font-weight:600; font-size:.95em; line-height:1.28;
+    color:#f6f2ff; text-shadow:0 1px 2px rgba(0,0,0,.5);
+    overflow-wrap:anywhere; word-break:break-word;
+    display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;
+    overflow:hidden; cursor:pointer;
   }
-  .item.multi .name::after{
-    content:'  ✅ STOCKED';
-    color:#9df0d9;
-    font-size:.78em;
-    letter-spacing:.08em;
+  .item.expanded .label{-webkit-line-clamp:unset; display:block}
+  .meta{display:flex; flex-wrap:wrap; gap:4px; align-items:center}
+  .pill{
+    font-size:.6em; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+    padding:2px 7px; border-radius:999px; white-space:nowrap;
+    color:#dcd2ff; background:rgba(201,184,255,.14);
+    border:1px solid rgba(201,184,255,.28);
   }
+  .pill.variant{color:#bfe9ff; border-color:rgba(191,233,255,.3); background:rgba(191,233,255,.10)}
+  .pill.order{color:#ffb0a6; border-color:rgba(255,138,128,.5); background:rgba(255,138,128,.16)}
+  .pill.stocked{color:#9df0d9; border-color:rgba(126,240,224,.45); background:rgba(126,240,224,.14)}
 
+  /* ── qty ─────────────────────────────────────────────── */
   .qty{
-    position:relative;
-    z-index:1;
-    min-width:38px;
-    text-align:center;
-    font-size:1.35em;
-    font-weight:800;
-    background:linear-gradient(180deg,#ffffff,#c9b8ff);
-    -webkit-background-clip:text; background-clip:text;
-    color:transparent;
-    filter:drop-shadow(0 0 9px rgba(201,184,255,.55));
+    position:relative; z-index:1; min-width:24px; text-align:center;
+    font-size:1.15em; font-weight:800;
+    color:#fff; -webkit-text-fill-color:#fff;
+    text-shadow:0 0 9px rgba(201,184,255,.8),0 0 18px rgba(126,240,224,.4);
   }
 
-  /* ── small gem buttons ───────────────────────────────── */
+  /* ── stepper buttons ─────────────────────────────────── */
   .pm,.del{
-    position:relative;
-    z-index:1;
-    flex:0 0 auto;
-    width:40px; height:40px;
-    padding:0;
-    border-radius:13px;
-    font-size:1.15em;
-    line-height:1;
-    margin:0;
+    position:relative; z-index:1; flex:0 0 auto;
+    width:34px; height:34px; padding:0; margin:0;
+    border-radius:11px; font-size:1.05em; line-height:1;
   }
   .pm::after,.del::after{display:none}
   .pm{
-    background:linear-gradient(150deg,
-      rgba(255,255,255,.32) 0%,
-      rgba(120,90,230,.28) 45%,
-      rgba(255,255,255,.12) 100%);
+    background:linear-gradient(150deg, rgba(255,255,255,.32) 0%, rgba(120,90,230,.28) 45%, rgba(255,255,255,.12) 100%);
     border:1px solid rgba(255,255,255,.3);
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,.65),
-      inset 0 -4px 9px rgba(0,0,0,.4),
-      0 4px 14px rgba(90,60,200,.35);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.65),inset 0 -4px 9px rgba(0,0,0,.4),0 4px 14px rgba(90,60,200,.35);
   }
   .del{
-    font-size:1em;
-    color:#ffd6e8;
+    font-size:.95em; color:#ffd6e8;
     background:linear-gradient(150deg, rgba(255,158,203,.32) 0%, rgba(120,20,60,.4) 100%);
     border:1px solid rgba(255,158,203,.45);
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,.4),
-      inset 0 -4px 9px rgba(0,0,0,.45),
-      0 4px 14px rgba(120,20,60,.4);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.4),inset 0 -4px 9px rgba(0,0,0,.45),0 4px 14px rgba(120,20,60,.4);
   }
 
-  #user{
-    font-size:.78em;
-    letter-spacing:.06em;
-    text-align:center;
-    color:var(--muted);
-    margin-bottom:8px;
-  }
-  #user::before{
-    content:"✦ ";
-    color:var(--aqua);
-  }
-
-  #count{
-    color:var(--gold);
-    font-weight:700;
-    text-shadow:0 0 12px rgba(255,216,138,.6);
-  }
-
-  p{
-    color:var(--muted);
-    text-align:center;
-    line-height:1.5;
-  }
+  #user{font-size:.78em; letter-spacing:.06em; text-align:center; color:var(--muted); margin-bottom:8px}
+  #user::before{content:"✦ "; color:var(--aqua)}
+  #count{color:var(--gold); font-weight:700; text-shadow:0 0 12px rgba(255,216,138,.6)}
+  p{color:var(--muted); text-align:center; line-height:1.5}
 
   /* ── desktop ─────────────────────────────────────────── */
   @media(min-width:768px){
-    body{
-      max-width:1180px;
-      margin:0 auto;
-      padding:26px 22px;
-      font-size:17px;
-    }
+    body{max-width:1180px; margin:0 auto; padding:26px 22px; font-size:17px}
     h1{font-size:1.85em}
-
-    /* wrapper is NOT the grid — it only has one child */
     #inventory{display:block}
-
-    /* grid lives on the actual item container */
     #list{
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      column-gap:26px;
-      row-gap:2px;
-      align-items:start;
+      display:grid; grid-template-columns:repeat(2,minmax(0,1fr));
+      column-gap:26px; row-gap:0; align-items:start;
     }
-    .hdr{grid-column:1/-1;margin-top:22px}
-    .item{padding:16px 16px;min-height:60px;gap:13px}
-    .qty{min-width:44px;font-size:1.45em}
-    .pm,.del{width:42px;height:42px}
-    .gem{width:28px;height:28px}
-    #login{max-width:380px;margin-top:72px}
+    .hdr{grid-column:1/-1; margin-top:22px}
+    .item{padding:16px; column-gap:13px; min-height:64px}
+    .gem{width:28px; height:28px}
+    .gem::after{top:3px; left:6px; width:9px; height:6px}
+    .label{font-size:1em; -webkit-line-clamp:3}
+    .qty{min-width:38px; font-size:1.45em}
+    .pm,.del{width:42px; height:42px; border-radius:13px; font-size:1.15em}
+    .chip{flex:0 0 auto; padding:10px 18px}
+    #login{max-width:380px; margin-top:72px}
     #search{padding:15px 18px}
   }
 
@@ -515,18 +355,31 @@
   <input id="pass" type="password" placeholder="Password">
   <button onclick="login()">Sign In</button>
 </div>
+
 <div id="app" style="display:none">
   <h1>Zodiac Shadows Inventory</h1>
   <div id="user"></div>
-  <input id="search" type="text" placeholder="🔍 Search brand or color..." oninput="render()">
+
+  <input id="search" type="text" placeholder="🔍 Search name, or type: order · in · qty:0" oninput="render()">
+
+  <div id="filters">
+    <button class="chip is-active" data-f="all">All <span id="cAll">0</span></button>
+    <button class="chip" data-f="in">In Stock <span id="cIn">0</span></button>
+    <button class="chip" data-f="order">To Order <span id="cOrder">0</span></button>
+  </div>
+
   <h3>Inventory (<span id="count">0</span> shown)</h3>
   <div id="inventory"><div id="list"></div></div>
+
   <h3>Add Manually</h3>
   <div id="addbar">
-    <input id="nBrand" type="text" placeholder="Brand">
-    <input id="nColor" type="text" placeholder="Color name">
+    <input id="nBrand" type="text" placeholder="Brand" list="brandList" autocomplete="off">
+    <input id="nColor" type="text" placeholder="Color name" list="colorList" autocomplete="off">
     <button onclick="addItem()">Add Item</button>
   </div>
+  <datalist id="brandList"></datalist>
+  <datalist id="colorList"></datalist>
+
   <h3>Tools</h3>
   <input type="file" accept=".csv" onchange="importCSV(event)">
   <br>
@@ -534,6 +387,7 @@
   <button class="blue" onclick="exportCSV()">💾 Backup CSV</button>
   <button class="blue" onclick="logout()">🔒 Sign Out</button>
 </div>
+
 <script>
 const firebaseConfig = {
   apiKey: "AIzaSyAdQORg8wG4WHIEXj5w9l4TAZUnxtR3Wxk",
@@ -547,22 +401,148 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
-const fdb = firebase.database();
+const fdb  = firebase.database();
 const ROOT = fdb.ref('filament');
 
 let db = JSON.parse(localStorage.getItem('fil') || '{}');
 const cache = () => localStorage.setItem('fil', JSON.stringify(db));
 const keyOf = (b,c) => 'FT|' + b.trim() + '|' + c.trim();
-const safeKey = k => k.replace(/[.#$$$$$\/]/g, '_');
-function status(q){ return q==0 ? 'out' : (q>=2 ? 'multi' : ''); }
+const safeKey = k => k.replace(/[.#$$$$$$$$$\/]/g, '_');
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
-/* deterministic hue from a color name → gem swatch */
-function hueOf(s){
-  let h = 0;
-  for(let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) % 360;
-  return h;
+const STATE = { status: 'all' };
+
+/* ══════════════════════════════════════════════════════════
+   NAME NORMALIZER
+   "(Mint Green Shimmer)Celestial Green"
+     → base "Celestial Green", variants ["Mint Green Shimmer"]
+   ══════════════════════════════════════════════════════════ */
+function splitName(raw){
+  const variants = [];
+  let rest = String(raw || '').replace(/$$([^)]*)$$/g, (_, g) => {
+    const v = g.trim();
+    if(v) variants.push(v);
+    return ' ';
+  });
+  rest = rest
+    .replace(/\s+/g, ' ')
+    .replace(/^[\s\-–—,|/]+/, '')
+    .replace(/[\s\-–—,|/]+$/, '');
+  rest = dedupeRepeat(rest);
+  return { base: rest || String(raw || '').trim(), variants };
 }
 
+function dedupeRepeat(s){
+  const w = s.split(' ').filter(Boolean);
+  if(w.length >= 2 && w.length % 2 === 0){
+    const h = w.length / 2;
+    if(w.slice(0, h).join(' ').toLowerCase() === w.slice(h).join(' ').toLowerCase()){
+      return w.slice(0, h).join(' ');
+    }
+  }
+  return s;
+}
+
+/* ══════════════════════════════════════════════════════════
+   GEM COLOUR — real colour words beat hashing
+   ══════════════════════════════════════════════════════════ */
+const HUE_WORDS = [
+  ['watermelon',348],['strawberry',352],['cherry',356],['burgundy',344],['wine',338],
+  ['coral',12],['salmon',8],['peach',22],['apricot',30],['lemon',56],['banana',52],
+  ['honey',44],['amber',40],['gold',45],['olive',70],['lime',92],['mint',156],
+  ['emerald',150],['teal',178],['turquoise',174],['aqua',182],['cyan',188],
+  ['sky',202],['azure',206],['navy',224],['lavender',272],['lilac',276],
+  ['violet',264],['plum',292],['magenta',310],['fuchsia',302],['rose',342],
+  ['pink',330],['crimson',350],['red',0],['orange',28],['chocolate',24],
+  ['brown',26],['tan',36],['beige',42],['cream',48],['ivory',50],['white',0],
+  ['silver',214],['grey',220],['gray',220],['charcoal',252],['onyx',255],
+  ['black',260],['blue',215],['green',130],['purple',276],['yellow',52],
+  ['celestial',262],['starlight',242],['neptune',214]
+];
+
+function gemStyle(name){
+  const n = String(name).toLowerCase();
+  let hue = null, sat = 80, light = 62;
+
+  for(const [w, h] of HUE_WORDS){
+    if(n.includes(w)){ hue = h; break; }
+  }
+  if(hue === null){
+    let h = 0;
+    for(let i = 0; i < n.length; i++) h = (h * 31 + n.charCodeAt(i)) % 360;
+    hue = h;
+  }
+
+  if(/\bwhite\b|\bcream\b|\bivory\b|\bsnow\b/.test(n)){ sat = 14; light = 92; }
+  else if(/\bblack\b|\bcharcoal\b|\bonyx\b/.test(n)){ sat = 22; light = 28; }
+  else if(/\bgrey\b|\bgray\b|\bsilver\b/.test(n)){ sat = 10; light = 74; }
+
+  if(/\bpastel\b/.test(n)){ light = Math.min(88, light + 14); sat = Math.max(42, sat - 16); }
+  if(/\bmatte\b/.test(n)){ sat = Math.max(32, sat - 20); }
+  if(/\bshimmer\b|\bglitter\b|\bsparkle\b|\bmetallic\b/.test(n)){ light = Math.min(92, light + 8); }
+
+  return `--h:${hue};--s:${sat}%;--l:${light}%`;
+}
+
+/* ══════════════════════════════════════════════════════════
+   SEARCH GRAMMAR
+   order / out / need      → qty 0
+   in / stocked / have     → qty 1+
+   low                     → qty 1
+   qty:3  qty=3  3         → qty exactly 3
+   qty>2  qty>=2  qty<2    → ranges
+   anything else           → text match on brand + colour
+   ══════════════════════════════════════════════════════════ */
+function parseSearch(raw){
+  const q = { terms: [], status: null, qtyEq: null, qtyMin: null, qtyMax: null };
+
+  String(raw || '').toLowerCase().split(/\s+/).filter(Boolean).forEach(t => {
+    if(['order','out','need','reorder','buy'].includes(t)){ q.status = 'order'; return; }
+    if(['in','stock','stocked','have','owned'].includes(t)){ q.status = 'in'; return; }
+    if(t === 'low'){ q.qtyEq = 1; return; }
+
+    let m;
+    m = t.match(/^qty[:=](\d+)$/);
+    if(m){ q.qtyEq = +m[1]; return; }
+
+    m = t.match(/^qty(>=|<=|>|<)(\d+)$/);
+    if(m){
+      const n = +m[2];
+      if(m[1] === '>')  q.qtyMin = n + 1;
+      if(m[1] === '>=') q.qtyMin = n;
+      if(m[1] === '<')  q.qtyMax = n - 1;
+      if(m[1] === '<=') q.qtyMax = n;
+      return;
+    }
+
+    if(/^\d+$/.test(t)){ q.qtyEq = +t; return; }
+    q.terms.push(t);
+  });
+
+  return q;
+}
+
+function matches(k, q){
+  const i = db[k];
+  const status = q.status || STATE.status;
+
+  if(status === 'order' && i.qty !== 0) return false;
+  if(status === 'in'    && i.qty < 1)   return false;
+
+  if(q.qtyEq  !== null && i.qty !== q.qtyEq) return false;
+  if(q.qtyMin !== null && i.qty < q.qtyMin)  return false;
+  if(q.qtyMax !== null && i.qty > q.qtyMax)  return false;
+
+  if(q.terms.length){
+    const hay = (i.brand + ' ' + i.color).toLowerCase();
+    return q.terms.every(t => hay.includes(t));
+  }
+  return true;
+}
+
+/* ══════════════════════════════════════════════════════════
+   AUTH
+   ══════════════════════════════════════════════════════════ */
 function login(){
   auth.signInWithEmailAndPassword(email.value, pass.value)
     .catch(e => alert('Login failed: ' + e.message));
@@ -571,9 +551,9 @@ function logout(){ auth.signOut(); }
 
 auth.onAuthStateChanged(user => {
   if(user){
-    document.getElementById('login').style.display='none';
-    document.getElementById('app').style.display='block';
-    document.getElementById('user').textContent = 'Synced as: ' + user.email;
+    document.getElementById('login').style.display = 'none';
+    document.getElementById('app').style.display   = 'block';
+    document.getElementById('user').textContent    = 'Synced as: ' + user.email;
     ROOT.on('value', snap => {
       const remote = snap.val() || {};
       db = {};
@@ -581,42 +561,90 @@ auth.onAuthStateChanged(user => {
       cache(); render();
     });
   } else {
-    document.getElementById('login').style.display='block';
-    document.getElementById('app').style.display='none';
+    document.getElementById('login').style.display = 'block';
+    document.getElementById('app').style.display   = 'none';
     ROOT.off();
   }
 });
 
+/* ══════════════════════════════════════════════════════════
+   RENDER
+   ══════════════════════════════════════════════════════════ */
 function render(){
-  const q = document.getElementById('search').value.toLowerCase();
+  const q = parseSearch(document.getElementById('search').value);
   const list = document.getElementById('list');
-  const keys = Object.keys(db)
-    .filter(k => !q || (db[k].brand + ' ' + db[k].color).toLowerCase().includes(q))
-    .sort((a,b)=>{
+
+  const allKeys = Object.keys(db);
+
+  // chip counters reflect the whole collection
+  let nIn = 0, nOrder = 0;
+  allKeys.forEach(k => { if(db[k].qty > 0) nIn++; else nOrder++; });
+  document.getElementById('cAll').textContent   = allKeys.length;
+  document.getElementById('cIn').textContent    = nIn;
+  document.getElementById('cOrder').textContent = nOrder;
+
+  // autocomplete lists
+  const brands  = [...new Set(allKeys.map(k => db[k].brand))].sort();
+  const colours = [...new Set(allKeys.map(k => db[k].color))].sort();
+  document.getElementById('brandList').innerHTML = brands.map(b => `<option value="${esc(b)}">`).join('');
+  document.getElementById('colorList').innerHTML = colours.map(c => `<option value="${esc(c)}">`).join('');
+
+  const keys = allKeys
+    .filter(k => matches(k, q))
+    .sort((a, b) => {
       const ba = db[a].brand.toLowerCase(), bb = db[b].brand.toLowerCase();
       if(ba !== bb) return ba.localeCompare(bb);
+      const ca = splitName(db[a].color).base.toLowerCase();
+      const cb = splitName(db[b].color).base.toLowerCase();
+      if(ca !== cb) return ca.localeCompare(cb);
       return db[a].color.localeCompare(db[b].color);
     });
+
   document.getElementById('count').textContent = keys.length;
+
   let lastBrand = '', html = '';
-  keys.map(k=>{
-    const i = db[k];
-    const ek = k.replace(/'/g,"\\'").replace(/"/g,'&quot;');
-    const hue = hueOf(i.color + '|' + i.brand);
-    if(i.brand !== lastBrand){ lastBrand = i.brand; html += `<div class="hdr">${i.brand}</div>`; }
-    html += `<div class="item ${status(i.qty)}">
-      <span class="gem" style="--h:${hue}"></span>
-      <div class="name">${i.color}</div>
-      <button class="pm" onclick="chg('${ek}',-1)">−</button>
+
+  keys.forEach(k => {
+    const i   = db[k];
+    const ek  = k.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+    const { base, variants } = splitName(i.color);
+    const cls = i.qty === 0 ? 'out' : (i.qty >= 2 ? 'multi' : '');
+
+    if(i.brand !== lastBrand){
+      lastBrand = i.brand;
+      html += `<div class="hdr">${esc(i.brand)}</div>`;
+    }
+
+    const pills = variants.map(v => `<span class="pill variant">${esc(v)}</span>`).join('');
+    const status = i.qty === 0
+      ? '<span class="pill order">To order</span>'
+      : (i.qty >= 2 ? '<span class="pill stocked">Stocked</span>' : '');
+
+    html += `<div class="item ${cls}">
+      <span class="gem" style="${gemStyle(base + ' ' + variants.join(' '))}"></span>
+      <div class="name">
+        <span class="label" title="${esc(i.color)}"
+              onclick="this.closest('.item').classList.toggle('expanded')">${esc(base)}</span>
+        ${pills || status ? `<div class="meta">${pills}${status}</div>` : ''}
+      </div>
+      <button class="pm" onclick="chg('${ek}',-1)" aria-label="Decrease">−</button>
       <span class="qty">${i.qty}</span>
-      <button class="pm" onclick="chg('${ek}',1)">+</button>
-      <button class="del" onclick="removeItem('${ek}')">🗑️</button>
+      <button class="pm" onclick="chg('${ek}',1)" aria-label="Increase">+</button>
+      <button class="del" onclick="removeItem('${ek}')" aria-label="Remove">🗑️</button>
     </div>`;
   });
-  list.innerHTML = html || '<p>' + (q ? 'No matches for "' + q + '"' : 'Nothing tracked yet. Import your CSV!') + '</p>';
+
+  list.innerHTML = html || '<p>' + (
+    document.getElementById('search').value
+      ? 'No matches.'
+      : 'Nothing tracked yet. Import your CSV or add an item above.'
+  ) + '</p>';
 }
 
-function chg(k,n){
+/* ══════════════════════════════════════════════════════════
+   ACTIONS
+   ══════════════════════════════════════════════════════════ */
+function chg(k, n){
   const q = Math.max(0, db[k].qty + n);
   ROOT.child(safeKey(k) + '/qty').set(q);
 }
@@ -633,52 +661,100 @@ function addItem(){
   if(!b || !c){ alert('Need both a brand and a color name.'); return; }
   const k = keyOf(b, c);
   if(db[k]){ alert('Already tracking ' + b + ' — ' + c + '.'); return; }
-  ROOT.child(safeKey(k)).set({brand:b, color:c, qty:0});
+  ROOT.child(safeKey(k)).set({ brand: b, color: c, qty: 0 });
   nBrand.value = ''; nColor.value = '';
+}
+
+/* ── quote-aware CSV line parser ─────────────────────────── */
+function parseCSVLine(line){
+  const out = [];
+  let cur = '', inQuotes = false;
+
+  for(let i = 0; i < line.length; i++){
+    const ch = line[i];
+    if(inQuotes){
+      if(ch === '"'){
+        if(line[i + 1] === '"'){ cur += '"'; i++; }
+        else inQuotes = false;
+      } else cur += ch;
+    } else {
+      if(ch === '"') inQuotes = true;
+      else if(ch === ','){ out.push(cur); cur = ''; }
+      else cur += ch;
+    }
+  }
+  out.push(cur);
+  return out.map(s => s.trim());
 }
 
 function importCSV(e){
   const f = e.target.files[0]; if(!f) return;
   const r = new FileReader();
   r.onload = () => {
+    const lines = r.result.replace(/\r/g, '').split('\n').filter(l => l.trim());
+    if(!lines.length) return;
+
+    // skip header only if row 1 has no numeric third column
+    const first = parseCSVLine(lines[0]);
+    const start = (first.length >= 3 && /^\d+$/.test(first[2])) ? 0 : 1;
+
     let added = 0, skipped = 0;
-    r.result.split('\n').slice(1).forEach(line=>{
-      const cols = line.split(',').map(s=>s.trim().replace(/"/g,''));
-      const brand = cols[0], color = cols[1], qty = parseInt(cols[2]) || 0;
+    lines.slice(start).forEach(line => {
+      const cols  = parseCSVLine(line);
+      const brand = cols[0], color = cols[1];
+      const qty   = parseInt(cols[2], 10) || 0;
       if(!brand || !color) return;
+
       const k = keyOf(brand, color);
       if(db[k]){ skipped++; }
       else {
-        ROOT.child(safeKey(k)).set({brand, color, qty: qty});
+        ROOT.child(safeKey(k)).set({ brand, color, qty });
         added++;
       }
     });
-    alert(added + ' new item(s) added with their CSV quantities. ' + skipped + ' existing kept as-is.');
+    alert(added + ' new item(s) added. ' + skipped + ' existing kept as-is.');
+    e.target.value = '';
   };
   r.readAsText(f);
 }
 
+/* ── export / share ──────────────────────────────────────── */
 function makeCSV(){
   let csv = 'Brand,Color,Qty\n';
-  for(const k in db) csv += `"${db[k].brand}","${db[k].color}",${db[k].qty}\n`;
+  for(const k in db){
+    const b = db[k].brand.replace(/"/g, '""');
+    const c = db[k].color.replace(/"/g, '""');
+    csv += `"${b}","${c}",${db[k].qty}\n`;
+  }
   return csv;
 }
 
 function exportCSV(){
   const a = document.createElement('a');
-  a.href = URL.createObjectURL(new Blob([makeCSV()],{type:'text/csv'}));
-  a.download = 'filament_backup.csv'; a.click();
+  a.href = URL.createObjectURL(new Blob([makeCSV()], { type: 'text/csv' }));
+  a.download = 'filament_backup.csv';
+  a.click();
 }
 
 async function shareList(){
-  const file = new File([makeCSV()], 'filament_list.csv', {type:'text/csv'});
-  if(navigator.canShare && navigator.canShare({files:[file]})){
-    await navigator.share({files:[file], title:'Zodiac Shadows Inventory'});
+  const file = new File([makeCSV()], 'filament_list.csv', { type: 'text/csv' });
+  if(navigator.canShare && navigator.canShare({ files: [file] })){
+    await navigator.share({ files: [file], title: 'Zodiac Shadows Inventory' });
   } else {
     await navigator.clipboard.writeText(makeCSV());
     alert('CSV copied to clipboard.');
   }
 }
+
+/* ── filter chips ────────────────────────────────────────── */
+document.querySelectorAll('.chip').forEach(btn => {
+  btn.addEventListener('click', () => {
+    STATE.status = btn.dataset.f;
+    document.querySelectorAll('.chip').forEach(x =>
+      x.classList.toggle('is-active', x === btn));
+    render();
+  });
+});
 
 if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
 </script>
